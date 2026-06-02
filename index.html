@@ -228,6 +228,7 @@ if(lang==="en"){
 }
 }
 function play(key,txt,slow=false){
+  // 台語：優先播放內嵌真人音檔
   if(lang==="tw"){
     if((key==="where" || key==="reassure") && EMBEDDED_TW_AUDIO["hospital_name"]){
       playTwSequence(["hospital_name"], txt);
@@ -239,13 +240,40 @@ function play(key,txt,slow=false){
       a.play().catch(()=>tts(txt,slow));
       return;
     }
+    // 台語若沒有音檔，才 fallback 到瀏覽器語音
+    tts(txt,slow);
+    return;
   }
-  let a=new Audio(`${CONFIG.audioBasePath}/${lang}/${key}.mp3`);
-  a.oncanplaythrough=()=>{a.currentTime=0;a.play().catch(()=>tts(txt,slow))};
-  a.onerror=()=>tts(txt,slow);
-  a.load();
+
+  // 中文、英文、日文：直接使用瀏覽器 TTS
+  // 不再先找 zh/en/ja 音檔，避免 iPad/Safari 因非同步 fallback 擋聲音。
+  tts(txt,slow);
 }
-function tts(txt,slow){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(txt);u.lang=T().tts;u.rate=slow?.55:.8;u.volume=1;speechSynthesis.speak(u)}
+function tts(txt,slow){
+  if(!("speechSynthesis" in window)){
+    status.innerText = txt + "（此瀏覽器不支援語音）";
+    return;
+  }
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(txt);
+    u.lang=T().tts;
+    u.rate=slow ? 0.55 : 0.82;
+    u.volume=1;
+
+    const voices=speechSynthesis.getVoices ? speechSynthesis.getVoices() : [];
+    if(voices && voices.length){
+      const exact=voices.find(v=>v.lang===T().tts);
+      const prefix=voices.find(v=>v.lang && v.lang.split("-")[0]===T().tts.split("-")[0]);
+      if(exact) u.voice=exact;
+      else if(prefix) u.voice=prefix;
+    }
+
+    speechSynthesis.speak(u);
+  }catch(e){
+    status.innerText = txt + "（語音播放失敗）";
+  }
+}
 document.addEventListener("DOMContentLoaded",()=>{render();setInterval(updateOri,60000)});
 </script>
 </body>
