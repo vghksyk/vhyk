@@ -6,6 +6,31 @@
 <title>ICU 溝通與定向平板｜永康榮總版 V2.8</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;background:#f2f4f6;color:#111827}header{background:#1f2933;color:white;padding:16px;text-align:center}header .main{font-size:34px;font-weight:900}header .credit{font-size:22px;font-weight:800;margin-top:6px}header .ver{font-size:18px;font-weight:700;margin-top:4px;opacity:.9}.ori{background:#fff8e1;border-bottom:5px solid #ffcc80;padding:18px;text-align:center}.ori.night{background:#1e293b;color:white}.ori-main{font-size:40px;font-weight:900;line-height:1.25}.ori-sub{font-size:28px;font-weight:800;line-height:1.35;margin-top:8px}.status{background:#fff3cd;padding:16px;text-align:center;font-size:30px;font-weight:900;min-height:72px}.lang{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px;background:#e5e7eb}.lang button{min-height:80px;font-size:26px;font-weight:900;border-radius:18px}.title{padding:14px 16px 0;font-size:34px;font-weight:900}.note{padding:8px 16px 0;font-size:24px;font-weight:800;color:#374151;line-height:1.35}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:16px}button{border:0;border-radius:28px;min-height:205px;padding:14px;background:white;box-shadow:0 5px 12px rgba(0,0,0,.18);touch-action:manipulation;cursor:pointer}button:active{transform:scale(.96);filter:brightness(.93)}.emoji{font-size:92px;display:block;line-height:1.05}.label{font-size:36px;font-weight:900;display:block;line-height:1.15}.sub{font-size:25px;font-weight:800;color:#374151;display:block;line-height:1.2;margin-top:8px}.danger{background:#ffcdd2}.care{background:#c8e6c9}.water{background:#bbdefb}.pain{background:#ffe0b2}.family{background:#e1bee7}.toilet{background:#d7ccc8}.sleep{background:#d1c4e9}.comm{background:#f8bbd0}.yes{background:#a5d6a7}.no{background:#ef9a9a}.info{background:#b2ebf2}.back{background:#e5e7eb}.home{background:#fde68a}.safety{background:#fee2e2;margin:12px 16px;padding:16px;border-radius:18px;font-size:23px;line-height:1.45;font-weight:800}.nav{position:sticky;bottom:0;background:rgba(242,244,246,.96);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 10px 14px;border-top:1px solid #d1d5db}.nav button{min-height:76px;font-size:20px;font-weight:900;border-radius:18px;padding:8px}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.86);color:white;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}.start{background:#4ade80;color:#111;font-size:42px;font-weight:900;min-height:120px;width:100%;margin-top:24px}.hidden{display:none!important}@media(max-width:520px){.emoji{font-size:76px}.label{font-size:31px}button{min-height:176px}.grid{gap:12px;padding:12px}.ori-main{font-size:32px}.ori-sub{font-size:24px}.lang button{font-size:22px}.nav button{font-size:17px}}
+
+.suction-small{
+  min-height:150px !important;
+}
+.suction-small .svg-icon{
+  width:86px !important;
+  height:64px !important;
+  margin-bottom:4px !important;
+}
+.suction-small .label{
+  font-size:32px !important;
+}
+@media(max-width:520px){
+  .suction-small{
+    min-height:136px !important;
+  }
+  .suction-small .svg-icon{
+    width:76px !important;
+    height:58px !important;
+  }
+  .suction-small .label{
+    font-size:29px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -13,7 +38,7 @@
 <header><div class="main">ICU 溝通與定向平板｜永康榮總版</div><div class="credit">臨床構想與原型設計：洪苡瑾</div><div class="ver">V2.8 醫療團隊版｜情感語音修正版</div></header>
 <section class="ori" id="ori"><div class="ori-main" id="oriMain">🏥 你現在在加護病房</div><div class="ori-sub" id="dateDisplay" style="font-size:32px;font-weight:900;margin-top:8px;"></div><div class="ori-sub" id="timeDisplay" style="font-size:34px;font-weight:900;margin-top:8px;"></div><div class="ori-sub" id="oriSub">醫療團隊正在照顧你。家人知道你在這裡。請放心。</div></section>
 <div class="status" id="status">請點選你想表達的需求</div>
-<div class="lang"><button onclick="setLang('zh')">中文</button><button onclick="setLang('tw')">台語</button><button onclick="setLang('en')">English</button><button onclick="setLang('ja')">日本語</button></div>
+<div class="lang"><button onclick="setLang('zh')">中文</button><button onclick="setLang('tw')">台語</button><button onclick="setLang('en')">English</button><button onclick="setLang('ja')">日本語</button></div><button id="voiceTestBtn" onclick="voiceTest()" style="width:calc(100% - 24px);margin:12px;min-height:70px;border-radius:18px;font-size:26px;font-weight:900;background:#dbeafe;">🔊 測試目前語言聲音</button>
 
 <section id="mainPage">
  <div class="title" id="mainTitle">常用需求</div>
@@ -53,36 +78,45 @@ function getPeriodKey(){
   const h=new Date().getHours();
   if(h>=6&&h<12) return "morning";
   if(h>=12&&h<14) return "noon";
-  if(h>=14&&h<18) return "afternoon";
+  if(h>=14&&h<17) return "afternoon";
+  if(h>=17&&h<19) return "dusk";
   return "midnight";
 }
 function getPeriodText(){
   const k=getPeriodKey();
   if(lang==="tw"){
-    return {morning:"這馬是早起",noon:"這馬是中晝",afternoon:"這馬是下晡",midnight:"這馬是暗時，請安心歇睏"}[k];
+    return {morning:"這馬是早起",noon:"這馬是中晝",afternoon:"這馬是下晡",dusk:"這馬是黃昏",midnight:"這馬是暗時，請安心歇睏"}[k];
   }
   if(lang==="en"){
-    return {morning:"It is morning.",noon:"It is noon.",afternoon:"It is afternoon.",midnight:"It is nighttime. Please rest."}[k];
+    return {morning:"It is morning.",noon:"It is noon.",afternoon:"It is afternoon.",dusk:"It is evening.",midnight:"It is nighttime. Please rest."}[k];
   }
-  return {morning:"現在是早上。",noon:"現在是中午。",afternoon:"現在是下午。",midnight:"現在是晚上，請安心休息。"}[k];
+  if(lang==="ja"){
+    return {morning:"今は朝です。",noon:"今は昼です。",afternoon:"今は午後です。",dusk:"今は夕方です。",midnight:"今は夜です。安心して休んでください。"}[k];
+  }
+  return {morning:"現在是早上。",noon:"現在是中午。",afternoon:"現在是下午。",dusk:"現在是黃昏。",midnight:"現在是晚上，請安心休息。"}[k];
 }
 function speakOpening(){
   const periodText=getPeriodText();
+
   if(lang==="tw"){
     const text=periodText+"。你現在佇"+CONFIG.hospital+"。醫療團隊咧照顧你。若有需要，請點你想講的圖。";
-    lastText=text; lastKey="opening";
+    lastText=text;
+    lastKey="yongkang_opening";
     status.innerText=text;
     playTwSequence([getPeriodKey(),"hospital_name"], text);
     return;
   }
+
   if(lang==="en"){
     speak(periodText+" You are in the ICU. The medical team is taking care of you. If you need help, please tap the picture you want to say.","opening");
     return;
   }
+
   if(lang==="ja"){
     speak(periodText+" あなたは今、永康榮總の集中治療室にいます。医療チームがあなたを見守っています。必要なことがあれば、伝えたい絵を押してください。","opening");
     return;
   }
+
   speak(periodText+"你現在在"+CONFIG.hospital+"。醫療團隊正在照顧你。如果你有需要，請點你想表達的圖。","opening");
 }
 function playTwSequence(keys, fallbackText){
@@ -112,11 +146,17 @@ return `<img class="pain-ill-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSU
 }
 function btn(label,emoji,cls,fn){
   let b=document.createElement("button");
-  b.className=cls;
+  b.className = emoji==="LUNG_ICON" ? cls + " suction-small" : cls;
   b.onclick=fn;
   let iconHtml = emoji==="LUNG_ICON" ? lungSvg() : (emoji==="CHEST_PAIN_ICON" ? chestPainIcon() : `<span class="emoji">${emoji}</span>`);
   b.innerHTML = iconHtml + `<span class="label">${label}</span>`;
   return b
+}
+function voiceTest(){
+  if(lang==="zh") speak("這是中文語音測試。醫療團隊正在照顧你。","voice_test");
+  else if(lang==="en") speak("This is an English voice test. The medical team is taking care of you.","voice_test");
+  else if(lang==="ja") speak("これは日本語の音声テストです。医療チームがあなたを見守っています。","voice_test");
+  else speak("這是台語語音測試。","reassure");
 }
 function renderMain(){mainGrid.innerHTML="";items.forEach(([k,e,c])=>{let txt=T().p[k];if(k==="pain")mainGrid.appendChild(btn(txt,e,c,()=>show("painPage")));else if(k==="time")mainGrid.appendChild(btn(txt,e,c,()=>speakPeriod()));else mainGrid.appendChild(btn(txt,e,c,()=>speak(txt,k)))});mainGrid.appendChild(btn(T().c.yes+" / "+T().c.no,"✅❌","comm",()=>show("yesNoPage")));mainGrid.appendChild(btn(T().commTitle,"💬","comm",()=>show("commPage")))}
 function emotionText(k){
@@ -196,8 +236,8 @@ if(lang==="tw"){
 }
 function updateOri(){
 let now=new Date(),h=now.getHours(),min=String(now.getMinutes()).padStart(2,"0");
-let dn=h>=6&&h<18?T().day:T().night;
-if(h>=6&&h<18)ori.classList.remove("night");else ori.classList.add("night");
+let dn=h>=6&&h<19?T().day:T().night;
+if(h>=6&&h<19)ori.classList.remove("night");else ori.classList.add("night");
 let weekdaysZh=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
 let weekdaysTw=["禮拜日","禮拜一","禮拜二","禮拜三","禮拜四","禮拜五","禮拜六"];
 let weekdaysEn=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -228,8 +268,11 @@ if(lang==="en"){
 }
 }
 function play(key,txt,slow=false){
-  // 台語：優先播放內嵌真人音檔
   if(lang==="tw"){
+    if(key==="yongkang_opening" || key==="opening"){
+      playTwSequence([getPeriodKey(),"hospital_name"], txt);
+      return;
+    }
     if((key==="where" || key==="reassure") && EMBEDDED_TW_AUDIO["hospital_name"]){
       playTwSequence(["hospital_name"], txt);
       return;
@@ -237,43 +280,63 @@ function play(key,txt,slow=false){
     if(EMBEDDED_TW_AUDIO[key]){
       const a=new Audio(EMBEDDED_TW_AUDIO[key]);
       a.currentTime=0;
-      a.play().catch(()=>tts(txt,slow));
+      a.play().catch(()=>speakByBrowser(txt,slow));
       return;
     }
-    // 台語若沒有音檔，才 fallback 到瀏覽器語音
-    tts(txt,slow);
+    speakByBrowser(txt,slow);
     return;
   }
 
-  // 中文、英文、日文：直接使用瀏覽器 TTS
-  // 不再先找 zh/en/ja 音檔，避免 iPad/Safari 因非同步 fallback 擋聲音。
-  tts(txt,slow);
+  // 國語、英文、日文：直接瀏覽器語音，不走 audio，不 fallback。
+  speakByBrowser(txt,slow);
 }
-function tts(txt,slow){
+
+function tts(txt,slow){speakByBrowser(txt,slow)}
+
+function speakByBrowser(txt,slow){
   if(!("speechSynthesis" in window)){
-    status.innerText = txt + "（此瀏覽器不支援語音）";
+    status.innerText=txt+"（此瀏覽器不支援語音）";
     return;
   }
+
   try{
-    speechSynthesis.cancel();
+    const synth=window.speechSynthesis;
+    synth.cancel();
+
     const u=new SpeechSynthesisUtterance(txt);
     u.lang=T().tts;
-    u.rate=slow ? 0.55 : 0.82;
+    u.rate=slow ? 0.58 : 0.86;
+    u.pitch=1;
     u.volume=1;
 
-    const voices=speechSynthesis.getVoices ? speechSynthesis.getVoices() : [];
+    const assignVoice=()=>{
+      const voices=synth.getVoices ? synth.getVoices() : [];
+      if(voices && voices.length){
+        const exact=voices.find(v=>v.lang===T().tts);
+        const prefix=voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(T().tts.split("-")[0].toLowerCase()));
+        if(exact) u.voice=exact;
+        else if(prefix) u.voice=prefix;
+      }
+      synth.speak(u);
+    };
+
+    const voices=synth.getVoices ? synth.getVoices() : [];
     if(voices && voices.length){
-      const exact=voices.find(v=>v.lang===T().tts);
-      const prefix=voices.find(v=>v.lang && v.lang.split("-")[0]===T().tts.split("-")[0]);
-      if(exact) u.voice=exact;
-      else if(prefix) u.voice=prefix;
+      assignVoice();
+    }else{
+      // iOS/Safari 有時第一次 voices 是空的；先註冊，再立即嘗試。
+      synth.onvoiceschanged=assignVoice;
+      assignVoice();
     }
 
-    speechSynthesis.speak(u);
+    u.onerror=function(event){
+      status.innerText=txt+"（語音未播放，請確認 iPad 沒有靜音，並允許網站播放聲音）";
+    };
   }catch(e){
-    status.innerText = txt + "（語音播放失敗）";
+    status.innerText=txt+"（語音播放失敗）";
   }
 }
+
 document.addEventListener("DOMContentLoaded",()=>{render();setInterval(updateOri,60000)});
 </script>
 </body>
