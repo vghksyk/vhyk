@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <!-- App icon / favicon -->
+  <link rel="icon" type="image/png" href="./icon.png?v=1">
+  <link rel="apple-touch-icon" href="./icon.png?v=1">
+  <meta name="apple-mobile-web-app-title" content="永康榮總 ICU 溝通平板">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <title>ICU 溝通與定向平板 V2.9｜多語整合＋長者模式＋互動定向模式</title>
@@ -409,7 +416,7 @@ body.interactive-active{background:#ffffff;}
 <section id="interactivePage" aria-label="互動定向與注意力輔助模式">
   <div class="interactive-wrap">
     <div class="interactive-title">互動定向與注意力輔助模式</div>
-    <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。外籍病人可優先用非語言互動。</div>
+    <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。互動題已改為 TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。</div>
     <div class="interactive-warning">本模式僅作為互動與觀察輔助，不判定譫妄陽性或陰性；正式評估仍依單位 CAM-ICU／ICDSC 流程。</div>
 <div class="interactive-warning">外籍病人或無母語翻譯者，建議優先使用「非語言互動」。紀錄僅代表可否配合互動，不作正式認知判讀。</div>
     <div id="interactiveHome" class="interactive-grid">
@@ -1099,9 +1106,10 @@ function nextInteractiveQuestion(){
 }
 
 
-/* ===== 互動模式慢速語音補強 ===== */
-const INTERACTIVE_SPEAK_RATE = 0.42;
-const INTERACTIVE_PAUSE_MS = 950;
+
+/* ===== 互動模式慢速語音補強：TTS 分段＋2秒停頓 ===== */
+const INTERACTIVE_SPEAK_RATE = 0.30;
+const INTERACTIVE_PAUSE_MS = 2000;
 
 function speakInteractiveText(text){
   stopPlayback();
@@ -1117,18 +1125,28 @@ function speakInteractiveText(text){
   }
 }
 
-function speakInteractivePromptChunks(text){
-  stopPlayback();
-  const raw = String(text || "");
+function buildInteractiveChunks(text){
+  const raw = String(text || "").replace(/\s+/g, " ").trim();
   const chunks = raw
-    .replace(/。/g, "。|")
-    .replace(/？/g, "？|")
-    .replace(/：/g, "：|")
+    .replace(/([。！？?；;：:，,、])/g, "$1|")
     .split("|")
     .map(x => x.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatMap(part => {
+      const cleaned = part.replace(/[。！？?；;：:，,、\s]/g, "");
+      if(/^[0-9０-９一二三四五六七八九十]+$/.test(cleaned) && cleaned.length >= 2){
+        return cleaned.split("");
+      }
+      return [part];
+    });
+  return chunks.length ? chunks : [raw];
+}
 
+function speakInteractivePromptChunks(text){
+  stopPlayback();
+  const chunks = buildInteractiveChunks(text);
   let i = 0;
+
   function speakNext(){
     if(i >= chunks.length) return;
     const u = new SpeechSynthesisUtterance(chunks[i]);
@@ -1138,10 +1156,13 @@ function speakInteractivePromptChunks(text){
     u.volume = 1;
     u.onend = () => {
       i++;
-      setTimeout(speakNext, INTERACTIVE_PAUSE_MS);
+      if(i < chunks.length){
+        setTimeout(speakNext, INTERACTIVE_PAUSE_MS);
+      }
     };
     window.speechSynthesis.speak(u);
   }
+
   speakNext();
 }
 
@@ -1159,7 +1180,7 @@ function playInteractivePrompt(){
       if(prompt) prompt.innerText = "剛剛請你記得什麼？";
       interactiveCurrent.prompt = "剛剛請你記得什麼？";
       speakInteractiveText("剛剛請你記得什麼？");
-    }, 7000);
+    }, 9000);
   }else{
     speakInteractivePromptChunks(text);
   }
