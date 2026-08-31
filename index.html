@@ -799,6 +799,142 @@ button.spotdiff-cell:active{
   .simple-board-cell{border-radius:12px;}
 }
 
+
+/* ===== 紅旗白旗 / 撿紅點 / 簡單有聲書 ===== */
+.gentle-game-wrap{
+  max-width:1120px;
+  margin:14px auto 0;
+  padding:14px;
+  border:5px solid #111827;
+  border-radius:24px;
+  background:#ffffff;
+}
+.gentle-game-title{
+  text-align:center;
+  font-size:clamp(24px,4vw,40px);
+  font-weight:900;
+  margin-bottom:8px;
+}
+.gentle-game-note{
+  text-align:center;
+  font-size:clamp(18px,2.7vw,28px);
+  font-weight:900;
+  line-height:1.35;
+  color:#374151;
+  background:#fffbeb;
+  border:3px solid #92400e;
+  border-radius:18px;
+  padding:10px;
+  margin-bottom:12px;
+}
+.gentle-prompt{
+  min-height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:pre-line;
+  padding:14px;
+  border:4px solid #111827;
+  border-radius:22px;
+  background:#f8fafc;
+  font-size:clamp(30px,5vw,54px);
+  font-weight:900;
+  line-height:1.25;
+}
+.gentle-options{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.gentle-options button,
+.gentle-controls button{
+  min-height:92px;
+  border:4px solid #111827;
+  border-radius:22px;
+  background:#eef2ff;
+  font-size:clamp(22px,3.4vw,36px);
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 5px 0 #111827;
+}
+.gentle-options button:active,
+.gentle-controls button:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #111827;
+}
+.gentle-controls{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.gentle-status{
+  min-height:58px;
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:clamp(22px,3.2vw,34px);
+  font-weight:900;
+  line-height:1.25;
+  background:#fef3c7;
+  border:4px solid #111827;
+  border-radius:18px;
+  padding:10px;
+}
+.flag-red{background:#fee2e2 !important;}
+.flag-white{background:#ffffff !important;}
+.flag-both{background:#fef3c7 !important;}
+.card-red{
+  color:#b91c1c;
+}
+.redpoint-card{
+  min-height:126px !important;
+  font-size:clamp(32px,5vw,56px) !important;
+  background:#fff !important;
+}
+.audiobook-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.audiobook-list button{
+  min-height:112px;
+  border:4px solid #111827;
+  border-radius:22px;
+  background:#ecfeff;
+  font-size:clamp(22px,3.2vw,34px);
+  font-weight:900;
+  cursor:pointer;
+}
+.audiobook-text{
+  margin-top:12px;
+  padding:14px;
+  border:4px solid #111827;
+  border-radius:18px;
+  background:#f8fafc;
+  font-size:clamp(22px,3vw,32px);
+  font-weight:800;
+  line-height:1.55;
+  white-space:pre-line;
+}
+@media(max-width:700px){
+  .gentle-options,
+  .gentle-controls,
+  .audiobook-list{
+    grid-template-columns:1fr;
+  }
+  .gentle-options button,
+  .gentle-controls button,
+  .audiobook-list button{
+    min-height:82px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -893,7 +1029,7 @@ button.spotdiff-cell:active{
     <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。題庫已擴充，新增小遊戲；TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。下方「重複／慢一點／聽不懂」已放大。</div>
     <div class="interactive-warning">本模式僅作為互動與觀察輔助，不判定譫妄陽性或陰性；正式評估仍依單位 CAM-ICU／ICDSC 流程。</div>
 <div class="interactive-warning">外籍病人或無母語翻譯者，建議優先使用「非語言互動」。紀錄僅代表可否配合互動，不作正式認知判讀。</div>
-<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動與找碴只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
+<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動、找碴、紅旗白旗、撿紅點與有聲書只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
 <div class="interactive-warning">Google 翻譯為外部連結，請避免輸入病人姓名、病歷號等個資。</div>
 <div class="interactive-warning">每位病人或每次評估前，請按「重置本次定向」清空上一筆紀錄。</div>
     <div id="interactiveHome" class="interactive-grid">
@@ -931,6 +1067,9 @@ button.spotdiff-cell:active{
     <button type="button" onclick="startSpotDiff()">🔎 簡易找碴</button>
     <button type="button" onclick="startPieceMove()">🔴 棋子移動<br><span style='font-size:.55em'>簡化互動</span></button>
     <button type="button" onclick="startXiangqiFree()">♟️ 象棋自由玩<br><span style='font-size:.55em'>不判斷輸贏</span></button>
+    <button type="button" onclick="startFlagGame()">🚩 紅旗白旗<br><span style='font-size:.55em'>反應互動</span></button>
+    <button type="button" onclick="startRedPoint()">🟥 簡化撿紅點<br><span style='font-size:.55em'>湊 10</span></button>
+    <button type="button" onclick="startAudioBook()">📖 簡單有聲書<br><span style='font-size:.55em'>慢速播放</span></button>
   </div>
   <div id="boardGameStatus" class="board-game-status">請選擇一個小遊戲。</div>
   <div id="ticTacToeBoard" class="ttt-board hidden"></div>
@@ -977,6 +1116,57 @@ button.spotdiff-cell:active{
     <button type="button" onclick="recordXiangqiFree()">📝 記錄互動</button>
     <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
   </div>
+</div>
+
+
+  
+<div id="flagGameWrap" class="gentle-game-wrap hidden">
+  <div class="gentle-game-title">🚩 紅旗白旗</div>
+  <div class="gentle-game-note">一人發號施令，病人可拿紅色／白色物品，或用左手／右手代替。只作反應互動，不作正式認知判讀。</div>
+  <div id="flagPrompt" class="gentle-prompt">請按下一題開始。</div>
+  <div class="gentle-options">
+    <button type="button" class="flag-red" onclick="recordFlagGame('完成：紅旗／左手')">🚩 紅旗／左手完成</button>
+    <button type="button" class="flag-white" onclick="recordFlagGame('完成：白旗／右手')">🏳️ 白旗／右手完成</button>
+    <button type="button" class="flag-both" onclick="recordFlagGame('完成：雙手／雙色')">🙌 雙手完成</button>
+    <button type="button" onclick="recordFlagGame('反應不一致')">↔️ 反應不一致</button>
+  </div>
+  <div class="gentle-controls">
+    <button type="button" onclick="nextFlagCommand()">➡️ 下一個口令</button>
+    <button type="button" onclick="recordFlagGame('無法配合')">⚪ 無法配合</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+  <div id="flagStatus" class="gentle-status">可由護理師口頭示範，也可按下一題播放慢速口令。</div>
+</div>
+
+<div id="redPointWrap" class="gentle-game-wrap hidden">
+  <div class="gentle-game-title">🟥 簡化撿紅點</div>
+  <div class="gentle-game-note">簡化版：請找一張牌，讓兩張加起來等於 10。訓練簡單計算與專注，不使用完整撲克牌規則。</div>
+  <div id="redPointPrompt" class="gentle-prompt">請按下一題開始。</div>
+  <div id="redPointOptions" class="gentle-options"></div>
+  <div class="gentle-controls">
+    <button type="button" onclick="nextRedPointRound()">➡️ 下一題</button>
+    <button type="button" onclick="recordRedPoint('無法配合')">⚪ 無法配合</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+  <div id="redPointStatus" class="gentle-status">低壓力互動，答錯可以再看一次。</div>
+</div>
+
+<div id="audioBookWrap" class="gentle-game-wrap hidden">
+  <div class="gentle-game-title">📖 簡單有聲書</div>
+  <div class="gentle-game-note">短篇、慢速、安撫型故事。使用瀏覽器內建語音包播放，不需事先錄音。病人疲倦或不想聽時請停止。</div>
+  <div class="audiobook-list">
+    <button type="button" onclick="playAudioBook('garden')">🌿 花園散步</button>
+    <button type="button" onclick="playAudioBook('sea')">🌊 海邊的風</button>
+    <button type="button" onclick="playAudioBook('home')">🏠 家人的話</button>
+    <button type="button" onclick="playAudioBook('rain')">🌦️ 雨後天空</button>
+  </div>
+  <div id="audioBookText" class="audiobook-text">請選擇一篇短篇有聲書。</div>
+  <div class="gentle-controls">
+    <button type="button" onclick="stopPlayback()">⏹ 停止播放</button>
+    <button type="button" onclick="recordAudioBook()">📝 記錄聆聽</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+  <div id="audioBookStatus" class="gentle-status">建議一次聽 1 篇即可，避免疲勞。</div>
 </div>
 
 
@@ -1863,6 +2053,9 @@ function resetBoardGame(){
   else if(boardGameType === "spotdiff") startSpotDiff();
   else if(boardGameType === "pieceMove") startPieceMove();
   else if(boardGameType === "xiangqiFree") startXiangqiFree();
+  else if(boardGameType === "flag") startFlagGame();
+  else if(boardGameType === "redpoint") startRedPoint();
+  else if(boardGameType === "audiobook") startAudioBook();
   else resetBoardGameMenuOnly();
 }
 
@@ -2149,7 +2342,7 @@ let xiangqiFreeState = [];
 let xiangqiSelected = null;
 
 function hideAllBoardPanels(){
-  const ids = ["ticTacToeBoard","gomokuBoard","spotDiffWrap","pieceMoveWrap","xiangqiFreeWrap"];
+  const ids = ["ticTacToeBoard","gomokuBoard","spotDiffWrap","pieceMoveWrap","xiangqiFreeWrap","flagGameWrap","redPointWrap","audioBookWrap"];
   ids.forEach(id => {
     const el = document.getElementById(id);
     if(el) el.classList.add("hidden");
@@ -2347,6 +2540,190 @@ function recordXiangqiFree(outcome){
   interactiveLogs.unshift(item);
   interactiveLogs = interactiveLogs.slice(0,20);
   updateInteractiveLog();
+}
+
+
+/* ===== 紅旗白旗 / 撿紅點 / 簡單有聲書 ===== */
+const FLAG_COMMANDS = [
+  "請舉紅旗。或舉左手。",
+  "請舉白旗。或舉右手。",
+  "請放下紅旗。或放下左手。",
+  "請放下白旗。或放下右手。",
+  "請紅旗舉高，白旗放下。",
+  "請白旗舉高，紅旗放下。",
+  "請兩隻手都舉高。",
+  "請兩隻手都放下。",
+  "請紅旗動一動。",
+  "請白旗動一動。",
+  "請先舉紅旗，再舉白旗。",
+  "請先放下白旗，再放下紅旗。"
+];
+let flagIndex = -1;
+let currentFlagCommand = "";
+
+function startFlagGame(){
+  boardGameType = "flag";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  const wrap = document.getElementById("flagGameWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "紅旗白旗：請按下一個口令開始。";
+  nextFlagCommand();
+}
+
+function nextFlagCommand(){
+  boardGameType = "flag";
+  flagIndex = (flagIndex + 1) % FLAG_COMMANDS.length;
+  currentFlagCommand = FLAG_COMMANDS[flagIndex];
+  const prompt = document.getElementById("flagPrompt");
+  const status = document.getElementById("flagStatus");
+  if(prompt) prompt.innerText = currentFlagCommand;
+  if(status) status.innerText = "請觀察病人是否能依口令反應。";
+  speakInteractivePromptChunks(currentFlagCommand);
+}
+
+function recordFlagGame(outcome){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const label = currentFlagCommand || "紅旗白旗互動";
+  const item = hh + ":" + mm + "｜紅旗白旗｜" + label + "｜" + outcome + "｜反應互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+  const status = document.getElementById("flagStatus");
+  if(status) status.innerText = "已記錄：" + outcome;
+}
+
+const RED_POINT_ROUNDS = [
+  {target:"♥3", need:"7", options:["♠7","♥5","♦2","♣9"], answer:"♠7"},
+  {target:"♦8", need:"2", options:["♥2","♣6","♠4","♦9"], answer:"♥2"},
+  {target:"♥A", need:"9", options:["♣9","♦3","♠5","♥7"], answer:"♣9"},
+  {target:"♦5", need:"5", options:["♠5","♥8","♣2","♦A"], answer:"♠5"},
+  {target:"♥4", need:"6", options:["♦6","♣8","♠2","♥9"], answer:"♦6"},
+  {target:"♦7", need:"3", options:["♠3","♥A","♣4","♦8"], answer:"♠3"},
+  {target:"♥2", need:"8", options:["♦8","♣6","♠9","♥5"], answer:"♦8"},
+  {target:"♦9", need:"1", options:["♣A","♥4","♠7","♦5"], answer:"♣A"},
+  {target:"♥6", need:"4", options:["♠4","♦2","♣9","♥A"], answer:"♠4"},
+  {target:"♦A", need:"9", options:["♥9","♠2","♣5","♦7"], answer:"♥9"}
+];
+let redPointIndex = -1;
+let currentRedPoint = null;
+
+function startRedPoint(){
+  boardGameType = "redpoint";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  const wrap = document.getElementById("redPointWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "簡化撿紅點：找一張牌湊成 10。";
+  nextRedPointRound();
+}
+
+function nextRedPointRound(){
+  boardGameType = "redpoint";
+  redPointIndex = (redPointIndex + 1) % RED_POINT_ROUNDS.length;
+  currentRedPoint = RED_POINT_ROUNDS[redPointIndex];
+
+  const prompt = document.getElementById("redPointPrompt");
+  const options = document.getElementById("redPointOptions");
+  const status = document.getElementById("redPointStatus");
+
+  if(prompt) prompt.innerText = "桌上這張是 " + currentRedPoint.target + "。\n請找一張牌，加起來等於 10。";
+  if(options){
+    options.innerHTML = "";
+    currentRedPoint.options.forEach(card => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "redpoint-card";
+      if(card.includes("♥") || card.includes("♦")) btn.classList.add("card-red");
+      btn.innerText = card;
+      btn.onclick = () => answerRedPoint(card, btn);
+      options.appendChild(btn);
+    });
+  }
+  if(status) status.innerText = "請選一張牌。答錯也可以再試一次。";
+  speakInteractivePromptChunks("桌上這張是 " + currentRedPoint.target + "。請找一張牌，加起來等於十。");
+}
+
+function answerRedPoint(card, btn){
+  if(!currentRedPoint) return;
+  const status = document.getElementById("redPointStatus");
+  document.querySelectorAll("#redPointOptions button").forEach(b => b.classList.remove("correct","wrong"));
+
+  if(card === currentRedPoint.answer){
+    btn.classList.add("correct");
+    if(status) status.innerText = "湊成 10 了，很好。";
+    recordRedPoint("答對：湊成 10");
+  }else{
+    btn.classList.add("wrong");
+    if(status) status.innerText = "可以再看一次。要找加起來等於 10 的牌。";
+  }
+}
+
+function recordRedPoint(outcome){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const label = currentRedPoint ? ("桌牌 " + currentRedPoint.target + "，需找 " + currentRedPoint.need) : "簡化撿紅點";
+  const item = hh + ":" + mm + "｜簡化撿紅點｜" + label + "｜" + outcome + "｜簡化計算互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+}
+
+const AUDIO_BOOKS = {
+  garden:{
+    title:"花園散步",
+    text:"現在，我們想像自己在一個安靜的花園裡。陽光很溫暖，風輕輕吹過來。旁邊有綠色的樹，也有慢慢開著的花。你可以慢慢呼吸。現在很安全，醫護人員在旁邊照顧你。你不用急，我們一步一步來。"
+  },
+  sea:{
+    title:"海邊的風",
+    text:"現在，我們想像自己坐在海邊。遠方有海浪的聲音，一波一波，慢慢靠近，又慢慢退回去。風吹過臉上，很舒服。你可以閉上眼睛休息一下。現在你在醫院裡，身邊有人照顧你。你不是一個人。"
+  },
+  home:{
+    title:"家人的話",
+    text:"現在，我們想像家人在你身邊，輕輕跟你說話。他們想告訴你，請你好好休息，不要擔心。醫護人員會照顧你，家人也在心裡陪著你。你已經很努力了，現在可以慢慢來。"
+  },
+  rain:{
+    title:"雨後天空",
+    text:"雨停了，天空慢慢變亮。空氣很乾淨，窗外的樹葉上還有小水滴。你可以慢慢吸氣，再慢慢吐氣。每一次呼吸，都讓身體放鬆一點。現在很安全，我們會陪你。"
+  }
+};
+let currentAudioBookKey = null;
+
+function startAudioBook(){
+  boardGameType = "audiobook";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  const wrap = document.getElementById("audioBookWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "簡單有聲書：請選擇一篇短文。";
+}
+
+function playAudioBook(key){
+  currentAudioBookKey = key;
+  const book = AUDIO_BOOKS[key];
+  const textBox = document.getElementById("audioBookText");
+  const status = document.getElementById("audioBookStatus");
+  if(!book) return;
+  if(textBox) textBox.innerText = book.title + "\n\n" + book.text;
+  if(status) status.innerText = "正在播放：" + book.title;
+  speakInteractivePromptChunks(book.text);
+}
+
+function recordAudioBook(){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const book = currentAudioBookKey ? AUDIO_BOOKS[currentAudioBookKey] : null;
+  const title = book ? book.title : "簡單有聲書";
+  const item = hh + ":" + mm + "｜簡單有聲書｜" + title + "｜已播放／聆聽｜安撫互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+  const status = document.getElementById("audioBookStatus");
+  if(status) status.innerText = "已記錄：" + title;
 }
 
 </script>
