@@ -935,6 +935,96 @@ button.spotdiff-cell:active{
   }
 }
 
+
+/* ===== 幼稚一點的病人稱讚區 ===== */
+.praise-wrap{
+  max-width:1120px;
+  margin:14px auto 0;
+  padding:16px;
+  border:6px solid #111827;
+  border-radius:28px;
+  background:#fff7ed;
+}
+.praise-title{
+  text-align:center;
+  font-size:clamp(30px,5vw,56px);
+  font-weight:900;
+  margin-bottom:8px;
+}
+.praise-note{
+  text-align:center;
+  font-size:clamp(20px,3vw,32px);
+  font-weight:900;
+  line-height:1.35;
+  color:#374151;
+  background:#fef3c7;
+  border:4px solid #92400e;
+  border-radius:22px;
+  padding:12px;
+  margin-bottom:14px;
+}
+.praise-big{
+  min-height:150px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:pre-line;
+  padding:18px;
+  border:6px solid #111827;
+  border-radius:28px;
+  background:#fff;
+  font-size:clamp(38px,7vw,74px);
+  font-weight:900;
+  line-height:1.18;
+}
+.praise-buttons{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:14px;
+}
+.praise-buttons button,
+.praise-controls button{
+  min-height:112px;
+  border:5px solid #111827;
+  border-radius:24px;
+  background:#fce7f3;
+  font-size:clamp(24px,3.7vw,40px);
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 0 #111827;
+}
+.praise-buttons button:active,
+.praise-controls button:active{
+  transform:translateY(5px);
+  box-shadow:0 1px 0 #111827;
+}
+.praise-controls{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.praise-star{
+  animation:praisePop .36s ease-out;
+}
+@keyframes praisePop{
+  0%{transform:scale(.9); opacity:.65;}
+  65%{transform:scale(1.05); opacity:1;}
+  100%{transform:scale(1);}
+}
+@media(max-width:700px){
+  .praise-buttons,
+  .praise-controls{
+    grid-template-columns:1fr;
+  }
+  .praise-buttons button,
+  .praise-controls button{
+    min-height:92px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1029,7 +1119,7 @@ button.spotdiff-cell:active{
     <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。題庫已擴充，新增小遊戲；TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。下方「重複／慢一點／聽不懂」已放大。</div>
     <div class="interactive-warning">本模式僅作為互動與觀察輔助，不判定譫妄陽性或陰性；正式評估仍依單位 CAM-ICU／ICDSC 流程。</div>
 <div class="interactive-warning">外籍病人或無母語翻譯者，建議優先使用「非語言互動」。紀錄僅代表可否配合互動，不作正式認知判讀。</div>
-<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動、找碴、紅旗白旗、撿紅點與有聲書只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
+<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動、找碴、紅旗白旗、撿紅點、有聲書與稱讚回饋只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
 <div class="interactive-warning">Google 翻譯為外部連結，請避免輸入病人姓名、病歷號等個資。</div>
 <div class="interactive-warning">每位病人或每次評估前，請按「重置本次定向」清空上一筆紀錄。</div>
     <div id="interactiveHome" class="interactive-grid">
@@ -1070,6 +1160,7 @@ button.spotdiff-cell:active{
     <button type="button" onclick="startFlagGame()">🚩 紅旗白旗<br><span style='font-size:.55em'>反應互動</span></button>
     <button type="button" onclick="startRedPoint()">🟥 簡化撿紅點<br><span style='font-size:.55em'>湊 10</span></button>
     <button type="button" onclick="startAudioBook()">📖 簡單有聲書<br><span style='font-size:.55em'>慢速播放</span></button>
+    <button type="button" onclick="startPraisePage()">🌟 稱讚病人<br><span style='font-size:.55em'>小星星回饋</span></button>
   </div>
   <div id="boardGameStatus" class="board-game-status">請選擇一個小遊戲。</div>
   <div id="ticTacToeBoard" class="ttt-board hidden"></div>
@@ -1167,6 +1258,29 @@ button.spotdiff-cell:active{
     <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
   </div>
   <div id="audioBookStatus" class="gentle-status">建議一次聽 1 篇即可，避免疲勞。</div>
+</div>
+
+
+  
+<div id="praiseWrap" class="praise-wrap hidden">
+  <div class="praise-title">🌟 稱讚病人</div>
+  <div class="praise-note">生病的時候很多事情都很無力；答對一題、點對一次、願意試一次，都值得被稱讚。</div>
+  <div id="praiseBig" class="praise-big">你做到了！\n超棒！🌟</div>
+  <div class="praise-buttons">
+    <button type="button" onclick="givePraise('答對了耶！你超棒！🌟')">🌟 答對了耶</button>
+    <button type="button" onclick="givePraise('小星星送給你！⭐')">⭐ 小星星</button>
+    <button type="button" onclick="givePraise('拍拍手！你好厲害！👏')">👏 拍拍手</button>
+    <button type="button" onclick="givePraise('你剛剛做到了！好棒！🎉')">🎉 你做到了</button>
+    <button type="button" onclick="givePraise('慢慢來也很棒！我們不急。💛')">💛 慢慢來也很棒</button>
+    <button type="button" onclick="givePraise('今天的小勇士就是你！🦸')">🦸 小勇士</button>
+    <button type="button" onclick="givePraise('再試一次也沒關係，你已經很努力了。🌈')">🌈 再試一次沒關係</button>
+    <button type="button" onclick="givePraise('謝謝你告訴我，我有看到你的努力。👀')">👀 我有看到</button>
+  </div>
+  <div class="praise-controls">
+    <button type="button" onclick="randomPraise()">🎲 隨機稱讚</button>
+    <button type="button" onclick="recordPraise()">📝 記錄稱讚</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
 </div>
 
 
@@ -1936,7 +2050,7 @@ function answerInteractive(answer, btn){
 
   if(answer === correct){
     if(btn) btn.classList.add("correct");
-    if(result) result.innerText = interactiveCurrent.game ? "答對，很好。" : "答對／反應符合。";
+    if(result) result.innerText = interactiveCurrent.game ? LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)] : "答對／反應符合。";
     recordInteractive("答對");
   }else{
     if(btn) btn.classList.add("wrong");
@@ -2056,6 +2170,7 @@ function resetBoardGame(){
   else if(boardGameType === "flag") startFlagGame();
   else if(boardGameType === "redpoint") startRedPoint();
   else if(boardGameType === "audiobook") startAudioBook();
+  else if(boardGameType === "praise") startPraisePage();
   else resetBoardGameMenuOnly();
 }
 
@@ -2096,7 +2211,7 @@ function playTicTacToe(i){
   const status = document.getElementById("boardGameStatus");
   if(winner){
     tttFinished = true;
-    if(status) status.innerText = winner + " 連成一線，很好。";
+    if(status) status.innerText = winner + " 連成一線！" + LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)];
     recordBoardGame("OOXX：" + winner + " 完成一局");
     return;
   }
@@ -2163,7 +2278,7 @@ function playGomoku(i){
   const status = document.getElementById("boardGameStatus");
   if(checkGomokuWin(i)){
     gomokuFinished = true;
-    if(status) status.innerText = (gomokuTurn === "●" ? "黑子" : "白子") + " 五子連線，很好。";
+    if(status) status.innerText = (gomokuTurn === "●" ? "黑子" : "白子") + " 五子連線！" + LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)];
     recordBoardGame("五子棋：" + (gomokuTurn === "●" ? "黑子" : "白子") + " 五子連線");
     return;
   }
@@ -2314,7 +2429,7 @@ function answerSpotDiff(i, btn){
   if(i === spotDiffCurrent.diff){
     btn.classList.add("correct");
     spotDiffDone = true;
-    if(status) status.innerText = "找到了，很好。";
+    littlePraiseToStatus("boardGameStatus");
     recordSpotDiff("找到了");
   }else{
     btn.classList.add("wrong");
@@ -2342,7 +2457,7 @@ let xiangqiFreeState = [];
 let xiangqiSelected = null;
 
 function hideAllBoardPanels(){
-  const ids = ["ticTacToeBoard","gomokuBoard","spotDiffWrap","pieceMoveWrap","xiangqiFreeWrap","flagGameWrap","redPointWrap","audioBookWrap"];
+  const ids = ["ticTacToeBoard","gomokuBoard","spotDiffWrap","pieceMoveWrap","xiangqiFreeWrap","flagGameWrap","redPointWrap","audioBookWrap","praiseWrap"];
   ids.forEach(id => {
     const el = document.getElementById(id);
     if(el) el.classList.add("hidden");
@@ -2423,7 +2538,7 @@ function playPieceMove(i){
     pieceMoveSelected = null;
     renderPieceMove();
     if(target === "⭐"){
-      if(status) status.innerText = "移到星星了，很好。";
+      littlePraiseToStatus("boardGameStatus");
       recordPieceMove("移到星星");
     }else{
       if(status) status.innerText = "已移動棋子。";
@@ -2592,7 +2707,10 @@ function recordFlagGame(outcome){
   interactiveLogs = interactiveLogs.slice(0,20);
   updateInteractiveLog();
   const status = document.getElementById("flagStatus");
-  if(status) status.innerText = "已記錄：" + outcome;
+  if(status){
+    if(outcome.includes("完成")) status.innerText = LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)];
+    else status.innerText = "已記錄：" + outcome;
+  }
 }
 
 const RED_POINT_ROUNDS = [
@@ -2653,7 +2771,7 @@ function answerRedPoint(card, btn){
 
   if(card === currentRedPoint.answer){
     btn.classList.add("correct");
-    if(status) status.innerText = "湊成 10 了，很好。";
+    littlePraiseToStatus("redPointStatus");
     recordRedPoint("答對：湊成 10");
   }else{
     btn.classList.add("wrong");
@@ -2724,6 +2842,70 @@ function recordAudioBook(){
   updateInteractiveLog();
   const status = document.getElementById("audioBookStatus");
   if(status) status.innerText = "已記錄：" + title;
+}
+
+
+/* ===== 幼稚一點的病人稱讚區 ===== */
+const LITTLE_PRAISES = [
+  "答對了耶！你超棒！🌟",
+  "小星星送給你！⭐",
+  "拍拍手！你好厲害！👏",
+  "你剛剛做到了！好棒！🎉",
+  "今天的小勇士就是你！🦸",
+  "哇！你有找到耶！🌈",
+  "很好很好，我有看到！👀",
+  "這樣就很棒了！💛",
+  "慢慢來也很棒，我們不急。🐢",
+  "你願意試一次，就很厲害了！🌼",
+  "答對了！給你一朵小花！🌸",
+  "成功！你真的有做到！🎁"
+];
+let currentPraiseText = "你做到了！超棒！🌟";
+
+function startPraisePage(){
+  boardGameType = "praise";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  const wrap = document.getElementById("praiseWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "稱讚病人：答對一點點，也值得被稱讚。";
+  givePraise("你做到了！\n超棒！🌟", false);
+}
+
+function givePraise(text, doSpeak=true){
+  currentPraiseText = text;
+  const big = document.getElementById("praiseBig");
+  const status = document.getElementById("boardGameStatus");
+  if(big){
+    big.innerText = text;
+    big.classList.remove("praise-star");
+    void big.offsetWidth;
+    big.classList.add("praise-star");
+  }
+  if(status) status.innerText = text.replace(/\n/g, " ");
+  if(doSpeak) speakInteractivePromptChunks(text.replace(/[🌟⭐👏🎉💛🦸🌈👀🐢🌼🌸🎁]/g, ""));
+}
+
+function randomPraise(){
+  const text = LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)];
+  givePraise(text);
+}
+
+function littlePraiseToStatus(statusId){
+  const text = LITTLE_PRAISES[Math.floor(Math.random() * LITTLE_PRAISES.length)];
+  const el = statusId ? document.getElementById(statusId) : document.getElementById("boardGameStatus");
+  if(el) el.innerText = text;
+  return text;
+}
+
+function recordPraise(){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const item = hh + ":" + mm + "｜稱讚病人｜" + currentPraiseText.replace(/\n/g," ") + "｜正向回饋，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
 }
 
 </script>
