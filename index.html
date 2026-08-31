@@ -476,6 +476,329 @@ body.interactive-active{background:#ffffff;}
   }
 }
 
+
+/* ===== 休閒棋盤小遊戲：OOXX / 五子棋 ===== */
+.board-game-wrap{
+  max-width:1120px;
+  margin:18px auto 0;
+  border:5px solid #111827;
+  border-radius:26px;
+  padding:16px;
+  background:#ffffff;
+}
+.board-game-title{
+  font-size:clamp(26px,4vw,42px);
+  font-weight:900;
+  text-align:center;
+  margin-bottom:8px;
+}
+.board-game-note{
+  font-size:clamp(18px,2.6vw,26px);
+  font-weight:800;
+  text-align:center;
+  line-height:1.35;
+  color:#374151;
+  background:#fffbeb;
+  border:3px solid #92400e;
+  border-radius:18px;
+  padding:10px;
+  margin-bottom:12px;
+}
+.board-game-menu{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:14px;
+}
+.board-game-menu button,
+.board-game-controls button{
+  min-height:92px;
+  border:4px solid #111827;
+  border-radius:22px;
+  background:#eef2ff;
+  font-size:clamp(22px,3.4vw,34px);
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 5px 0 #111827;
+}
+.board-game-menu button:active,
+.board-game-controls button:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #111827;
+}
+.board-game-controls{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.board-game-status{
+  min-height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:clamp(22px,3.4vw,34px);
+  font-weight:900;
+  line-height:1.25;
+  background:#fef3c7;
+  border:4px solid #111827;
+  border-radius:18px;
+  padding:10px;
+}
+.ttt-board{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(84px, 1fr));
+  gap:12px;
+  max-width:560px;
+  margin:14px auto 0;
+}
+.ttt-cell{
+  aspect-ratio:1/1;
+  border:5px solid #111827;
+  border-radius:22px;
+  background:#f8fafc;
+  font-size:clamp(56px,10vw,100px);
+  font-weight:900;
+  cursor:pointer;
+}
+.ttt-cell:active{
+  transform:scale(.97);
+}
+.gomoku-board{
+  display:grid;
+  grid-template-columns:repeat(10, 1fr);
+  gap:4px;
+  max-width:min(92vw, 680px);
+  margin:14px auto 0;
+  padding:8px;
+  background:#fef3c7;
+  border:5px solid #111827;
+  border-radius:18px;
+}
+.gomoku-cell{
+  aspect-ratio:1/1;
+  min-width:0;
+  border:2px solid #92400e;
+  border-radius:50%;
+  background:#fff7ed;
+  font-size:clamp(17px,3.6vw,34px);
+  font-weight:900;
+  cursor:pointer;
+  line-height:1;
+}
+.gomoku-cell.black{
+  background:#111827;
+  color:#ffffff;
+}
+.gomoku-cell.white{
+  background:#ffffff;
+  color:#111827;
+  border-color:#111827;
+}
+.advanced-game-disabled{
+  opacity:.58;
+  background:#e5e7eb !important;
+}
+@media(max-width:700px){
+  .board-game-menu,
+  .board-game-controls{
+    grid-template-columns:1fr;
+  }
+  .board-game-controls button{
+    min-height:76px;
+  }
+  .gomoku-board{
+    gap:3px;
+    padding:6px;
+  }
+}
+
+
+/* ===== 簡易大家來找碴 ===== */
+.spotdiff-wrap{
+  max-width:1120px;
+  margin:14px auto 0;
+  padding:12px;
+  border:5px solid #111827;
+  border-radius:24px;
+  background:#f8fafc;
+}
+.spotdiff-title{
+  text-align:center;
+  font-size:clamp(24px,4vw,40px);
+  font-weight:900;
+  margin-bottom:8px;
+}
+.spotdiff-instruction{
+  text-align:center;
+  font-size:clamp(18px,2.8vw,28px);
+  font-weight:900;
+  line-height:1.35;
+  color:#374151;
+  margin-bottom:12px;
+}
+.spotdiff-panels{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.spotdiff-panel{
+  border:4px solid #111827;
+  border-radius:22px;
+  background:#ffffff;
+  padding:10px;
+}
+.spotdiff-panel-title{
+  text-align:center;
+  font-size:clamp(20px,3.2vw,32px);
+  font-weight:900;
+  margin-bottom:8px;
+}
+.spotdiff-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:10px;
+}
+.spotdiff-cell{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:4px solid #d1d5db;
+  border-radius:20px;
+  background:#fff;
+  font-size:clamp(56px,9vw,96px);
+  font-weight:900;
+}
+button.spotdiff-cell{
+  cursor:pointer;
+}
+button.spotdiff-cell:active{
+  transform:scale(.96);
+}
+.spotdiff-cell.correct{
+  border-color:#166534;
+  background:#dcfce7;
+}
+.spotdiff-cell.wrong{
+  border-color:#991b1b;
+  background:#fee2e2;
+}
+.spotdiff-controls{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.spotdiff-controls button{
+  min-height:82px;
+  border:4px solid #111827;
+  border-radius:20px;
+  background:#eef2ff;
+  font-size:clamp(20px,3vw,32px);
+  font-weight:900;
+  cursor:pointer;
+}
+@media(max-width:700px){
+  .spotdiff-panels{
+    grid-template-columns:1fr;
+  }
+  .spotdiff-controls{
+    grid-template-columns:1fr;
+  }
+  .spotdiff-cell{
+    font-size:clamp(48px,16vw,82px);
+  }
+}
+
+
+/* ===== 簡化版棋子移動 / 象棋自由玩 ===== */
+.simple-board-wrap{
+  max-width:1120px;
+  margin:14px auto 0;
+  padding:14px;
+  border:5px solid #111827;
+  border-radius:24px;
+  background:#ffffff;
+}
+.simple-board-title{
+  text-align:center;
+  font-size:clamp(24px,4vw,40px);
+  font-weight:900;
+  margin-bottom:8px;
+}
+.simple-board-note{
+  text-align:center;
+  font-size:clamp(18px,2.7vw,28px);
+  font-weight:900;
+  line-height:1.35;
+  color:#374151;
+  background:#fffbeb;
+  border:3px solid #92400e;
+  border-radius:18px;
+  padding:10px;
+  margin-bottom:12px;
+}
+.simple-board-grid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:8px;
+  max-width:min(92vw,640px);
+  margin:0 auto;
+  padding:10px;
+  background:#fef3c7;
+  border:5px solid #111827;
+  border-radius:18px;
+}
+.simple-board-cell{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:3px solid #92400e;
+  border-radius:16px;
+  background:#fff7ed;
+  font-size:clamp(26px,7vw,54px);
+  font-weight:900;
+  cursor:pointer;
+  user-select:none;
+}
+.simple-board-cell.selected{
+  outline:6px solid #2563eb;
+  background:#dbeafe;
+}
+.simple-board-cell.target{
+  background:#dcfce7;
+  border-color:#166534;
+}
+.simple-board-cell:active{
+  transform:scale(.96);
+}
+.simple-board-controls{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.simple-board-controls button{
+  min-height:82px;
+  border:4px solid #111827;
+  border-radius:20px;
+  background:#eef2ff;
+  font-size:clamp(20px,3vw,32px);
+  font-weight:900;
+  cursor:pointer;
+}
+.simple-piece-red{color:#b91c1c;}
+.simple-piece-black{color:#111827;}
+.simple-piece-blue{color:#1d4ed8;}
+@media(max-width:700px){
+  .simple-board-controls{grid-template-columns:1fr;}
+  .simple-board-grid{gap:6px;padding:7px;}
+  .simple-board-cell{border-radius:12px;}
+}
+
 </style>
 </head>
 <body>
@@ -570,12 +893,13 @@ body.interactive-active{background:#ffffff;}
     <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。題庫已擴充，新增小遊戲；TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。下方「重複／慢一點／聽不懂」已放大。</div>
     <div class="interactive-warning">本模式僅作為互動與觀察輔助，不判定譫妄陽性或陰性；正式評估仍依單位 CAM-ICU／ICDSC 流程。</div>
 <div class="interactive-warning">外籍病人或無母語翻譯者，建議優先使用「非語言互動」。紀錄僅代表可否配合互動，不作正式認知判讀。</div>
-<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。</div>
+<div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動與找碴只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
 <div class="interactive-warning">Google 翻譯為外部連結，請避免輸入病人姓名、病歷號等個資。</div>
 <div class="interactive-warning">每位病人或每次評估前，請按「重置本次定向」清空上一筆紀錄。</div>
     <div id="interactiveHome" class="interactive-grid">
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('nonverbal')">🖐️ 非語言互動<span class="small">外籍／無翻譯優先</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('game')">🎮 小遊戲<span class="small">找圖案／點數字</span></button>
+      <button class="interactive-menu-btn" type="button" onclick="showBoardGameMenu()">⭕ 棋盤遊戲<span class="small">OOXX／五子棋</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('command')">👂 中文聽指令</button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('yesno')">✅ 中文是／不是</button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('orientation')">🏥 中文定向問答</button>
@@ -597,6 +921,73 @@ body.interactive-active{background:#ffffff;}
       </div>
       <div id="interactiveResult" class="interactive-result">請播放題目或讓病人作答。</div>
     </div>
+
+<div id="boardGameWrap" class="board-game-wrap hidden">
+  <div class="board-game-title">休閒棋盤小遊戲</div>
+  <div class="board-game-note">陪伴與互動用，不倒數、不扣分、不作正式認知判讀。病人疲倦、喘、疼痛或不想玩時請立即停止。</div>
+  <div class="board-game-menu">
+    <button type="button" onclick="startTicTacToe()">⭕❌ OOXX</button>
+    <button type="button" onclick="startGomoku()">⚫⚪ 五子棋</button>
+    <button type="button" onclick="startSpotDiff()">🔎 簡易找碴</button>
+    <button type="button" onclick="startPieceMove()">🔴 棋子移動<br><span style='font-size:.55em'>簡化互動</span></button>
+    <button type="button" onclick="startXiangqiFree()">♟️ 象棋自由玩<br><span style='font-size:.55em'>不判斷輸贏</span></button>
+  </div>
+  <div id="boardGameStatus" class="board-game-status">請選擇一個小遊戲。</div>
+  <div id="ticTacToeBoard" class="ttt-board hidden"></div>
+  <div id="gomokuBoard" class="gomoku-board hidden"></div>
+  
+<div id="spotDiffWrap" class="spotdiff-wrap hidden">
+  <div class="spotdiff-title">🔎 簡易大家來找碴</div>
+  <div class="spotdiff-instruction">請看左邊，再看右邊。右邊有一個地方不一樣，請點右邊不一樣的地方。</div>
+  <div class="spotdiff-panels">
+    <div class="spotdiff-panel">
+      <div class="spotdiff-panel-title">左邊</div>
+      <div id="spotLeftGrid" class="spotdiff-grid"></div>
+    </div>
+    <div class="spotdiff-panel">
+      <div class="spotdiff-panel-title">右邊：請點不一樣</div>
+      <div id="spotRightGrid" class="spotdiff-grid"></div>
+    </div>
+  </div>
+  <div class="spotdiff-controls">
+    <button type="button" onclick="nextSpotDiff()">➡️ 下一題</button>
+    <button type="button" onclick="recordSpotDiff()">📝 記錄互動</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+</div>
+
+  
+<div id="pieceMoveWrap" class="simple-board-wrap hidden">
+  <div class="simple-board-title">🔴 棋子移動遊戲</div>
+  <div class="simple-board-note">請先點棋子，再點要移動的位置。這是陪伴互動，不檢查正式棋類規則。</div>
+  <div id="pieceMoveGrid" class="simple-board-grid"></div>
+  <div class="simple-board-controls">
+    <button type="button" onclick="resetPieceMove()">↻ 重開</button>
+    <button type="button" onclick="recordPieceMove()">📝 記錄互動</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+</div>
+
+<div id="xiangqiFreeWrap" class="simple-board-wrap hidden">
+  <div class="simple-board-title">♟️ 象棋棋盤自由玩</div>
+  <div class="simple-board-note">簡化自由移動版：先點棋子，再點空格移動。不判斷將軍、不判斷輸贏。</div>
+  <div id="xiangqiFreeGrid" class="simple-board-grid"></div>
+  <div class="simple-board-controls">
+    <button type="button" onclick="resetXiangqiFree()">↻ 重開</button>
+    <button type="button" onclick="recordXiangqiFree()">📝 記錄互動</button>
+    <button type="button" onclick="showBoardGameMenu()">🏠 回遊戲選單</button>
+  </div>
+</div>
+
+
+  <div class="board-game-controls">
+    <button type="button" onclick="resetBoardGame()">↻ 重開本局</button>
+    <button type="button" onclick="recordBoardGame()">📝 記錄互動</button>
+    <button type="button" onclick="hideBoardGame()">🏠 回小遊戲</button>
+  </div>
+</div>
+
+
     <div class="interactive-log">
       <div class="interactive-log-title">本次互動紀錄</div>
       <div id="interactiveLogList" class="interactive-log-list">尚無紀錄。</div>
@@ -1424,6 +1815,538 @@ function resetInteractiveSession(){
 
   updateInteractiveLog();
   showInteractiveHome();
+}
+
+
+/* ===== 休閒棋盤小遊戲：OOXX / 五子棋 ===== */
+let boardGameType = null;
+let tttState = [];
+let tttTurn = "O";
+let tttFinished = false;
+let gomokuState = [];
+let gomokuTurn = "●";
+let gomokuFinished = false;
+const GOMOKU_SIZE = 10;
+
+function showBoardGameMenu(){
+  stopPlayback();
+  const home = document.getElementById("interactiveHome");
+  const card = document.getElementById("interactiveCard");
+  const wrap = document.getElementById("boardGameWrap");
+  if(home) home.classList.add("hidden");
+  if(card) card.classList.add("hidden");
+  if(wrap) wrap.classList.remove("hidden");
+  resetBoardGameMenuOnly();
+}
+
+function hideBoardGame(){
+  const wrap = document.getElementById("boardGameWrap");
+  if(wrap) wrap.classList.add("hidden");
+  showInteractiveHome();
+}
+
+function resetBoardGameMenuOnly(){
+  boardGameType = null;
+  const ttt = document.getElementById("ticTacToeBoard");
+  const gomoku = document.getElementById("gomokuBoard");
+  const spot = document.getElementById("spotDiffWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(ttt) ttt.classList.add("hidden");
+  if(gomoku) gomoku.classList.add("hidden");
+  if(spot) spot.classList.add("hidden");
+  if(status) status.innerText = "請選擇一個小遊戲。";
+}
+
+function resetBoardGame(){
+  if(boardGameType === "ttt") startTicTacToe();
+  else if(boardGameType === "gomoku") startGomoku();
+  else if(boardGameType === "spotdiff") startSpotDiff();
+  else if(boardGameType === "pieceMove") startPieceMove();
+  else if(boardGameType === "xiangqiFree") startXiangqiFree();
+  else resetBoardGameMenuOnly();
+}
+
+function startTicTacToe(){
+  boardGameType = "ttt";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  tttState = Array(9).fill("");
+  tttTurn = "O";
+  tttFinished = false;
+
+  const ttt = document.getElementById("ticTacToeBoard");
+  const gomoku = document.getElementById("gomokuBoard");
+  const spot = document.getElementById("spotDiffWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(gomoku) gomoku.classList.add("hidden");
+  if(spot) spot.classList.add("hidden");
+  if(ttt){
+    ttt.classList.remove("hidden");
+    ttt.innerHTML = "";
+    for(let i=0;i<9;i++){
+      const btn = document.createElement("button");
+      btn.className = "ttt-cell";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "OOXX 格子 " + (i+1));
+      btn.onclick = () => playTicTacToe(i);
+      ttt.appendChild(btn);
+    }
+  }
+  if(status) status.innerText = "OOXX 開始。現在是 O。";
+}
+
+function playTicTacToe(i){
+  if(tttFinished || tttState[i]) return;
+  tttState[i] = tttTurn;
+  renderTicTacToe();
+
+  const winner = checkTicTacToeWinner();
+  const status = document.getElementById("boardGameStatus");
+  if(winner){
+    tttFinished = true;
+    if(status) status.innerText = winner + " 連成一線，很好。";
+    recordBoardGame("OOXX：" + winner + " 完成一局");
+    return;
+  }
+  if(tttState.every(Boolean)){
+    tttFinished = true;
+    if(status) status.innerText = "平手，完成一局。";
+    recordBoardGame("OOXX：平手完成一局");
+    return;
+  }
+
+  tttTurn = tttTurn === "O" ? "X" : "O";
+  if(status) status.innerText = "換 " + tttTurn + "。";
+}
+
+function renderTicTacToe(){
+  const ttt = document.getElementById("ticTacToeBoard");
+  if(!ttt) return;
+  [...ttt.children].forEach((cell, i) => {
+    cell.innerText = tttState[i];
+  });
+}
+
+function checkTicTacToeWinner(){
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for(const [a,b,c] of lines){
+    if(tttState[a] && tttState[a] === tttState[b] && tttState[a] === tttState[c]) return tttState[a];
+  }
+  return "";
+}
+
+function startGomoku(){
+  boardGameType = "gomoku";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  gomokuState = Array(GOMOKU_SIZE * GOMOKU_SIZE).fill("");
+  gomokuTurn = "●";
+  gomokuFinished = false;
+
+  const ttt = document.getElementById("ticTacToeBoard");
+  const board = document.getElementById("gomokuBoard");
+  const spot = document.getElementById("spotDiffWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(ttt) ttt.classList.add("hidden");
+  if(spot) spot.classList.add("hidden");
+  if(board){
+    board.classList.remove("hidden");
+    board.innerHTML = "";
+    for(let i=0;i<GOMOKU_SIZE * GOMOKU_SIZE;i++){
+      const btn = document.createElement("button");
+      btn.className = "gomoku-cell";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "五子棋格子 " + (i+1));
+      btn.onclick = () => playGomoku(i);
+      board.appendChild(btn);
+    }
+  }
+  if(status) status.innerText = "五子棋開始。黑子先下。";
+}
+
+function playGomoku(i){
+  if(gomokuFinished || gomokuState[i]) return;
+  gomokuState[i] = gomokuTurn;
+  renderGomoku();
+
+  const status = document.getElementById("boardGameStatus");
+  if(checkGomokuWin(i)){
+    gomokuFinished = true;
+    if(status) status.innerText = (gomokuTurn === "●" ? "黑子" : "白子") + " 五子連線，很好。";
+    recordBoardGame("五子棋：" + (gomokuTurn === "●" ? "黑子" : "白子") + " 五子連線");
+    return;
+  }
+  if(gomokuState.every(Boolean)){
+    gomokuFinished = true;
+    if(status) status.innerText = "棋盤已滿，完成一局。";
+    recordBoardGame("五子棋：棋盤已滿完成一局");
+    return;
+  }
+
+  gomokuTurn = gomokuTurn === "●" ? "○" : "●";
+  if(status) status.innerText = "換 " + (gomokuTurn === "●" ? "黑子" : "白子") + "。";
+}
+
+function renderGomoku(){
+  const board = document.getElementById("gomokuBoard");
+  if(!board) return;
+  [...board.children].forEach((cell, i) => {
+    cell.innerText = gomokuState[i];
+    cell.classList.toggle("black", gomokuState[i] === "●");
+    cell.classList.toggle("white", gomokuState[i] === "○");
+  });
+}
+
+function checkGomokuWin(last){
+  const player = gomokuState[last];
+  if(!player) return false;
+  const r = Math.floor(last / GOMOKU_SIZE);
+  const c = last % GOMOKU_SIZE;
+  const dirs = [[1,0],[0,1],[1,1],[1,-1]];
+
+  for(const [dr,dc] of dirs){
+    let count = 1;
+    count += countGomokuDirection(r, c, dr, dc, player);
+    count += countGomokuDirection(r, c, -dr, -dc, player);
+    if(count >= 5) return true;
+  }
+  return false;
+}
+
+function countGomokuDirection(r, c, dr, dc, player){
+  let count = 0;
+  let nr = r + dr;
+  let nc = c + dc;
+  while(nr >= 0 && nr < GOMOKU_SIZE && nc >= 0 && nc < GOMOKU_SIZE){
+    const idx = nr * GOMOKU_SIZE + nc;
+    if(gomokuState[idx] !== player) break;
+    count++;
+    nr += dr;
+    nc += dc;
+  }
+  return count;
+}
+
+function showAdvancedGameNote(gameName){
+  const status = document.getElementById("boardGameStatus");
+  if(status) status.innerText = gameName + "規則較複雜，先列為進階遊戲，暫不開放。建議 ICU bedside 先使用 OOXX 或五子棋。";
+}
+
+function recordBoardGame(customText){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  let text = customText || "棋盤小遊戲互動";
+  const item = hh + ":" + mm + "｜" + text + "｜小遊戲互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+}
+
+
+/* ===== 簡易大家來找碴 ===== */
+const SPOT_DIFF_BANK = [
+  {label:"找碴：星星變愛心", left:["⭐","🥤","🛏️","🕘"], right:["❤️","🥤","🛏️","🕘"], diff:0},
+  {label:"找碴：杯子變水滴", left:["👪","🥤","🩺","⭐"], right:["👪","💧","🩺","⭐"], diff:1},
+  {label:"找碴：床變蘋果", left:["🛏️","🕘","❤️","⚪"], right:["🍎","🕘","❤️","⚪"], diff:0},
+  {label:"找碴：時鐘變星星", left:["🥤","🛏️","🕘","👪"], right:["🥤","🛏️","⭐","👪"], diff:2},
+  {label:"找碴：醫護變家人", left:["💧","🩺","❤️","🛏️"], right:["💧","👪","❤️","🛏️"], diff:1},
+  {label:"找碴：圓形變三角形", left:["⚪","⭐","🥤","🛏️"], right:["🔺","⭐","🥤","🛏️"], diff:0},
+  {label:"找碴：笑臉變哭臉", left:["😊","⭐","💧","🕘"], right:["😢","⭐","💧","🕘"], diff:0},
+  {label:"找碴：蘋果變杯子", left:["🛏️","🍎","👪","❤️"], right:["🛏️","🥤","👪","❤️"], diff:1},
+  {label:"找碴：水滴變星星", left:["💧","⚪","🕘","🩺"], right:["⭐","⚪","🕘","🩺"], diff:0},
+  {label:"找碴：家人變床", left:["🥤","👪","⭐","❤️"], right:["🥤","🛏️","⭐","❤️"], diff:1},
+  {label:"找碴：數字 8 變 3", left:["8","5","1","9"], right:["3","5","1","9"], diff:0},
+  {label:"找碴：數字 2 變 7", left:["4","2","6","8"], right:["4","7","6","8"], diff:1}
+];
+
+let spotDiffIndex = -1;
+let spotDiffCurrent = null;
+let spotDiffDone = false;
+
+function startSpotDiff(){
+  boardGameType = "spotdiff";
+  if(typeof hideAllBoardPanels === "function") hideAllBoardPanels();
+  const ttt = document.getElementById("ticTacToeBoard");
+  const gomoku = document.getElementById("gomokuBoard");
+  const spot = document.getElementById("spotDiffWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(ttt) ttt.classList.add("hidden");
+  if(gomoku) gomoku.classList.add("hidden");
+  if(spot) spot.classList.remove("hidden");
+  if(status) status.innerText = "大家來找碴。請點右邊不一樣的地方。";
+  nextSpotDiff();
+}
+
+function nextSpotDiff(){
+  boardGameType = "spotdiff";
+  spotDiffIndex = (spotDiffIndex + 1) % SPOT_DIFF_BANK.length;
+  spotDiffCurrent = SPOT_DIFF_BANK[spotDiffIndex];
+  spotDiffDone = false;
+
+  const left = document.getElementById("spotLeftGrid");
+  const right = document.getElementById("spotRightGrid");
+  const spot = document.getElementById("spotDiffWrap");
+  const status = document.getElementById("boardGameStatus");
+
+  if(spot) spot.classList.remove("hidden");
+  if(left){
+    left.innerHTML = "";
+    spotDiffCurrent.left.forEach(x => {
+      const div = document.createElement("div");
+      div.className = "spotdiff-cell";
+      div.innerText = x;
+      left.appendChild(div);
+    });
+  }
+  if(right){
+    right.innerHTML = "";
+    spotDiffCurrent.right.forEach((x, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "spotdiff-cell";
+      btn.innerText = x;
+      btn.onclick = () => answerSpotDiff(i, btn);
+      right.appendChild(btn);
+    });
+  }
+  if(status) status.innerText = "請看右邊，點不一樣的地方。";
+  speakInteractivePromptChunks("請看左邊，再看右邊。右邊有一個地方不一樣，請點不一樣的地方。");
+}
+
+function answerSpotDiff(i, btn){
+  if(!spotDiffCurrent || spotDiffDone) return;
+  const status = document.getElementById("boardGameStatus");
+  const all = document.querySelectorAll("#spotRightGrid .spotdiff-cell");
+  all.forEach(x => x.classList.remove("correct","wrong"));
+
+  if(i === spotDiffCurrent.diff){
+    btn.classList.add("correct");
+    spotDiffDone = true;
+    if(status) status.innerText = "找到了，很好。";
+    recordSpotDiff("找到了");
+  }else{
+    btn.classList.add("wrong");
+    if(status) status.innerText = "可以再看一次。";
+  }
+}
+
+function recordSpotDiff(outcome){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const label = spotDiffCurrent ? spotDiffCurrent.label : "簡易大家來找碴";
+  const result = outcome || "完成互動";
+  const item = hh + ":" + mm + "｜" + label + "｜" + result + "｜找碴小遊戲互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+}
+
+
+/* ===== 簡化版棋子移動 / 象棋自由玩 ===== */
+let pieceMoveState = [];
+let pieceMoveSelected = null;
+let xiangqiFreeState = [];
+let xiangqiSelected = null;
+
+function hideAllBoardPanels(){
+  const ids = ["ticTacToeBoard","gomokuBoard","spotDiffWrap","pieceMoveWrap","xiangqiFreeWrap"];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.add("hidden");
+  });
+}
+
+function startPieceMove(){
+  boardGameType = "pieceMove";
+  hideAllBoardPanels();
+  const wrap = document.getElementById("pieceMoveWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "棋子移動：請先點棋子，再點要移動的位置。";
+  resetPieceMove();
+  speakInteractivePromptChunks("棋子移動遊戲。請先點棋子，再點要移動的位置。");
+}
+
+function resetPieceMove(){
+  boardGameType = "pieceMove";
+  pieceMoveSelected = null;
+  pieceMoveState = Array(25).fill("");
+  pieceMoveState[0] = "🔴";
+  pieceMoveState[4] = "🔵";
+  pieceMoveState[12] = "⭐";
+  pieceMoveState[20] = "🔴";
+  pieceMoveState[24] = "🔵";
+  renderPieceMove();
+  const status = document.getElementById("boardGameStatus");
+  if(status) status.innerText = "請先點棋子，再點要移動的位置。";
+}
+
+function renderPieceMove(){
+  const grid = document.getElementById("pieceMoveGrid");
+  if(!grid) return;
+  grid.innerHTML = "";
+  pieceMoveState.forEach((value, i) => {
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "simple-board-cell";
+    if(i === pieceMoveSelected) cell.classList.add("selected");
+    if(value === "⭐") cell.classList.add("target");
+    if(value === "🔴") cell.classList.add("simple-piece-red");
+    if(value === "🔵") cell.classList.add("simple-piece-blue");
+    cell.innerText = value;
+    cell.onclick = () => playPieceMove(i);
+    grid.appendChild(cell);
+  });
+}
+
+function playPieceMove(i){
+  const status = document.getElementById("boardGameStatus");
+  const value = pieceMoveState[i];
+
+  if(pieceMoveSelected === null){
+    if(value === "🔴" || value === "🔵"){
+      pieceMoveSelected = i;
+      if(status) status.innerText = "已選擇棋子。請點要移動的位置。";
+      renderPieceMove();
+    }else{
+      if(status) status.innerText = "請先點棋子。";
+    }
+    return;
+  }
+
+  if(i === pieceMoveSelected){
+    pieceMoveSelected = null;
+    if(status) status.innerText = "已取消選擇。";
+    renderPieceMove();
+    return;
+  }
+
+  const moving = pieceMoveState[pieceMoveSelected];
+  const target = pieceMoveState[i];
+
+  if(target === "" || target === "⭐"){
+    pieceMoveState[pieceMoveSelected] = "";
+    pieceMoveState[i] = moving;
+    pieceMoveSelected = null;
+    renderPieceMove();
+    if(target === "⭐"){
+      if(status) status.innerText = "移到星星了，很好。";
+      recordPieceMove("移到星星");
+    }else{
+      if(status) status.innerText = "已移動棋子。";
+    }
+  }else{
+    if(status) status.innerText = "這裡已經有棋子，請選別的位置。";
+  }
+}
+
+function recordPieceMove(outcome){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const result = outcome || "棋子移動互動";
+  const item = hh + ":" + mm + "｜棋子移動遊戲｜" + result + "｜簡化棋盤互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
+}
+
+function startXiangqiFree(){
+  boardGameType = "xiangqiFree";
+  hideAllBoardPanels();
+  const wrap = document.getElementById("xiangqiFreeWrap");
+  const status = document.getElementById("boardGameStatus");
+  if(wrap) wrap.classList.remove("hidden");
+  if(status) status.innerText = "象棋自由玩：先點棋子，再點空格移動。";
+  resetXiangqiFree();
+  speakInteractivePromptChunks("象棋棋盤自由玩。先點棋子，再點空格移動。不判斷輸贏。");
+}
+
+function resetXiangqiFree(){
+  boardGameType = "xiangqiFree";
+  xiangqiSelected = null;
+  xiangqiFreeState = Array(25).fill("");
+  xiangqiFreeState[0] = "車";
+  xiangqiFreeState[1] = "馬";
+  xiangqiFreeState[2] = "將";
+  xiangqiFreeState[3] = "炮";
+  xiangqiFreeState[4] = "兵";
+  xiangqiFreeState[20] = "卒";
+  xiangqiFreeState[21] = "包";
+  xiangqiFreeState[22] = "帥";
+  xiangqiFreeState[23] = "傌";
+  xiangqiFreeState[24] = "俥";
+  renderXiangqiFree();
+  const status = document.getElementById("boardGameStatus");
+  if(status) status.innerText = "請點一顆棋子，再點空格移動。";
+}
+
+function renderXiangqiFree(){
+  const grid = document.getElementById("xiangqiFreeGrid");
+  if(!grid) return;
+  grid.innerHTML = "";
+  xiangqiFreeState.forEach((value, i) => {
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "simple-board-cell";
+    if(i === xiangqiSelected) cell.classList.add("selected");
+    if(value){
+      const redPieces = ["車","馬","將","炮","兵"];
+      const blackPieces = ["卒","包","帥","傌","俥"];
+      if(redPieces.includes(value)) cell.classList.add("simple-piece-red");
+      if(blackPieces.includes(value)) cell.classList.add("simple-piece-black");
+    }
+    cell.innerText = value;
+    cell.onclick = () => playXiangqiFree(i);
+    grid.appendChild(cell);
+  });
+}
+
+function playXiangqiFree(i){
+  const status = document.getElementById("boardGameStatus");
+  const value = xiangqiFreeState[i];
+
+  if(xiangqiSelected === null){
+    if(value){
+      xiangqiSelected = i;
+      if(status) status.innerText = "已選擇「" + value + "」。請點空格移動。";
+      renderXiangqiFree();
+    }else{
+      if(status) status.innerText = "請先點一顆棋子。";
+    }
+    return;
+  }
+
+  if(i === xiangqiSelected){
+    xiangqiSelected = null;
+    if(status) status.innerText = "已取消選擇。";
+    renderXiangqiFree();
+    return;
+  }
+
+  if(value){
+    xiangqiSelected = i;
+    if(status) status.innerText = "改選擇「" + value + "」。請點空格移動。";
+    renderXiangqiFree();
+    return;
+  }
+
+  xiangqiFreeState[i] = xiangqiFreeState[xiangqiSelected];
+  xiangqiFreeState[xiangqiSelected] = "";
+  xiangqiSelected = null;
+  renderXiangqiFree();
+  if(status) status.innerText = "已移動棋子。";
+}
+
+function recordXiangqiFree(outcome){
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,"0");
+  const mm = String(now.getMinutes()).padStart(2,"0");
+  const result = outcome || "象棋自由移動互動";
+  const item = hh + ":" + mm + "｜象棋棋盤自由玩｜" + result + "｜簡化棋盤互動，不作正式認知判讀";
+  interactiveLogs.unshift(item);
+  interactiveLogs = interactiveLogs.slice(0,20);
+  updateInteractiveLog();
 }
 
 </script>
