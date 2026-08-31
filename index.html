@@ -327,6 +327,155 @@ body.interactive-active{background:#ffffff;}
   .interactive-prompt{min-height:130px;}
 }
 
+
+/* ===== 多語言一般模式：下方控制鍵放大 ===== */
+.nav{
+  grid-template-columns:repeat(6,1fr) !important;
+  gap:10px !important;
+  padding:10px 12px 16px !important;
+}
+.nav button{
+  min-height:92px !important;
+  font-size:24px !important;
+  border-radius:22px !important;
+  padding:10px 8px !important;
+  line-height:1.18 !important;
+}
+#navRepeat,
+#navSlow,
+#navDont{
+  grid-column:span 2;
+  min-height:118px !important;
+  font-size:30px !important;
+  font-weight:900 !important;
+  border:4px solid rgba(17,24,39,.18);
+}
+#navHome,
+#navStop{
+  grid-column:span 3;
+  min-height:82px !important;
+  font-size:24px !important;
+}
+#navRepeat{background:#e0f2fe;}
+#navSlow{background:#dcfce7;}
+#navDont{background:#fef3c7;}
+#navStop{background:#fee2e2;}
+
+/* 溝通輔助頁：把最常用的三顆做成優先大按鈕 */
+.comm-priority{
+  min-height:255px !important;
+  border:5px solid rgba(17,24,39,.22);
+}
+.comm-priority .emoji{
+  font-size:112px !important;
+}
+.comm-priority .label{
+  font-size:44px !important;
+  line-height:1.12 !important;
+}
+.comm-priority .zh-sub{
+  font-size:28px !important;
+  opacity:.9 !important;
+  margin-top:12px !important;
+}
+@media(max-width:700px){
+  .nav{
+    grid-template-columns:repeat(6,1fr) !important;
+  }
+  .nav button{
+    min-height:78px !important;
+    font-size:20px !important;
+  }
+  #navRepeat,
+  #navSlow,
+  #navDont{
+    min-height:102px !important;
+    font-size:24px !important;
+  }
+  #navHome,
+  #navStop{
+    min-height:72px !important;
+    font-size:20px !important;
+  }
+  .comm-priority{
+    min-height:215px !important;
+  }
+  .comm-priority .emoji{
+    font-size:92px !important;
+  }
+  .comm-priority .label{
+    font-size:36px !important;
+  }
+  .comm-priority .zh-sub{
+    font-size:23px !important;
+  }
+}
+
+
+/* ===== Google Translate 外部連結鈕 ===== */
+#navTranslate{
+  grid-column:span 6;
+  min-height:86px !important;
+  font-size:26px !important;
+  font-weight:900 !important;
+  background:#eef2ff !important;
+  border:4px solid rgba(67,56,202,.25) !important;
+}
+.translate-note{
+  grid-column:span 6;
+  font-size:16px;
+  line-height:1.25;
+  color:#374151;
+  text-align:center;
+  margin-top:-4px;
+  padding:0 8px 4px;
+}
+@media(max-width:700px){
+  #navTranslate{
+    min-height:78px !important;
+    font-size:22px !important;
+  }
+  .translate-note{
+    font-size:14px;
+  }
+}
+
+
+/* ===== 護理定向／互動定向：重置鈕 ===== */
+.interactive-reset-btn{
+  grid-column:span 2;
+  min-height:110px !important;
+  font-size:30px !important;
+  font-weight:900 !important;
+  background:#ffe4e6 !important;
+  border-color:#be123c !important;
+}
+.interactive-log-reset{
+  width:100%;
+  min-height:78px;
+  margin-top:12px;
+  border:4px solid #be123c;
+  border-radius:18px;
+  background:#ffe4e6;
+  font-size:clamp(22px,3.2vw,34px);
+  font-weight:900;
+  cursor:pointer;
+}
+.interactive-log-reset:active{
+  transform:translateY(3px);
+}
+@media(max-width:700px){
+  .interactive-reset-btn{
+    grid-column:span 1;
+    min-height:96px !important;
+    font-size:24px !important;
+  }
+  .interactive-log-reset{
+    min-height:68px;
+    font-size:22px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -369,7 +518,9 @@ body.interactive-active{background:#ffffff;}
 <section id="commPage" class="hidden"><div class="title" id="commTitle">溝通輔助</div><div class="grid" id="commGrid"></div></section>
 <section id="oriPage" class="hidden"><div class="title" id="oriTitle">定向提醒</div><div class="grid" id="oriGrid"></div></section>
 
-<nav class="nav"><button onclick="show('mainPage')" id="navHome">首頁</button><button onclick="repeatLast()" id="navRepeat">重複</button><button onclick="speakCommon('slow')" id="navSlow">慢一點</button><button onclick="speakCommon('dont')" id="navDont">聽不懂</button><button onclick="stopPlayback()" id="navStop">停止</button></nav>
+<nav class="nav"><button onclick="show('mainPage')" id="navHome">首頁</button><button onclick="repeatLast()" id="navRepeat">重複</button><button onclick="speakCommon('slow')" id="navSlow">慢一點</button><button onclick="speakCommon('dont')" id="navDont">聽不懂</button>
+  <button id="navTranslate" type="button" onclick="openGoogleTranslate()">🌐 開啟 Google 翻譯</button>
+  <div class="translate-note">外部翻譯工具：請避免輸入姓名、病歷號、身分證字號等個資。</div><button onclick="stopPlayback()" id="navStop">停止</button></nav>
 
 <section id="elderPage" aria-label="長者模式常用需求">
   <div class="elder-wrap">
@@ -416,10 +567,12 @@ body.interactive-active{background:#ffffff;}
 <section id="interactivePage" aria-label="互動定向與注意力輔助模式">
   <div class="interactive-wrap">
     <div class="interactive-title">互動定向與注意力輔助模式</div>
-    <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。題庫已擴充，新增小遊戲；TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。</div>
+    <div class="interactive-subtitle">給護理師 bedside 使用的小練習：協助觀察注意力、理解力與定向反應。題庫已擴充，新增小遊戲；TTS 分段慢速播放，中間停頓 2 秒；外籍病人可優先用非語言互動。下方「重複／慢一點／聽不懂」已放大。</div>
     <div class="interactive-warning">本模式僅作為互動與觀察輔助，不判定譫妄陽性或陰性；正式評估仍依單位 CAM-ICU／ICDSC 流程。</div>
 <div class="interactive-warning">外籍病人或無母語翻譯者，建議優先使用「非語言互動」。紀錄僅代表可否配合互動，不作正式認知判讀。</div>
 <div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。</div>
+<div class="interactive-warning">Google 翻譯為外部連結，請避免輸入病人姓名、病歷號等個資。</div>
+<div class="interactive-warning">每位病人或每次評估前，請按「重置本次定向」清空上一筆紀錄。</div>
     <div id="interactiveHome" class="interactive-grid">
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('nonverbal')">🖐️ 非語言互動<span class="small">外籍／無翻譯優先</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('game')">🎮 小遊戲<span class="small">找圖案／點數字</span></button>
@@ -447,6 +600,7 @@ body.interactive-active{background:#ffffff;}
     <div class="interactive-log">
       <div class="interactive-log-title">本次互動紀錄</div>
       <div id="interactiveLogList" class="interactive-log-list">尚無紀錄。</div>
+      <button class="interactive-log-reset" type="button" onclick="resetInteractiveSession()">↻ 重置本次定向紀錄</button>
     </div>
   </div>
 </section>
@@ -782,7 +936,8 @@ function renderComm(){
   commGrid.innerHTML="";
   [["again","🔁"],["slow","🐢"],["dont","❓"],["know","👍"],["disagree","👎"],["stop","✋"]].forEach(([k,e])=>{
     let txt=T().c[k];
-    commGrid.appendChild(btn(withZhSub(txt,"c",k),e,"comm",()=>speak(txt,k)));
+    const priority = ["again","slow","dont"].includes(k);
+    commGrid.appendChild(btn(withZhSub(txt,"c",k),e,priority ? "comm comm-priority" : "comm",()=>speak(txt,k)));
   });
   commGrid.appendChild(btn(withZhSub(T().c.yes+" / "+T().c.no,"c","yes"),"✅❌","comm",()=>show("yesNoPage")));
   commGrid.appendChild(btn(withZhSub(T().c.home,"c","home"),"🏠","back",()=>show("mainPage")));
@@ -1240,6 +1395,37 @@ function updateInteractiveLog(){
     list.appendChild(div);
   });
 }
+
+function openGoogleTranslate(){
+  stopPlayback();
+  window.open("https://translate.google.com/?sl=auto&tl=zh-TW&op=translate", "_blank", "noopener,noreferrer");
+}
+
+
+function resetInteractiveSession(){
+  stopPlayback();
+  if(typeof interactivePromptTimer !== "undefined") clearTimeout(interactivePromptTimer);
+  if(typeof interactivePromptToken !== "undefined") interactivePromptToken++;
+
+  interactiveCategory = null;
+  interactiveIndex = -1;
+  interactiveCurrent = null;
+  interactiveLogs = [];
+
+  const prompt = document.getElementById("interactivePrompt");
+  const note = document.getElementById("interactiveNote");
+  const answers = document.getElementById("interactiveAnswers");
+  const result = document.getElementById("interactiveResult");
+
+  if(prompt) prompt.innerText = "請選擇一個練習";
+  if(note) note.innerText = "";
+  if(answers) answers.innerHTML = "";
+  if(result) result.innerText = "已重置本次定向紀錄。";
+
+  updateInteractiveLog();
+  showInteractiveHome();
+}
+
 </script>
 </body>
 </html>
