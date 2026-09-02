@@ -3,12 +3,6 @@
 <head>
 <!-- Copyright: 洪苡瑾｜請勿二改 -->
   <!-- App icon / favicon -->
-  <link rel="icon" type="image/png" href="./icon.png?v=1">
-  <link rel="apple-touch-icon" href="./icon.png?v=1">
-  <meta name="apple-mobile-web-app-title" content="永康榮總 ICU 溝通平板">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <title>ICU 溝通與定向平板 V2.9｜多語整合＋長者模式＋互動定向模式</title>
@@ -1050,7 +1044,7 @@ button.spotdiff-cell:active{
 }
 
 
-/* ===== 國際譫妄數字注意力：看到目標數字有動作 ===== */
+/* ===== 國際譫妄數字聽覺注意力：聽到目標數字有動作 ===== */
 .delirium-number-wrap{max-width:1120px;margin:14px auto 0;padding:16px;border:6px solid #111827;border-radius:28px;background:#fff;}
 .delirium-number-title{text-align:center;font-size:clamp(28px,4.5vw,50px);font-weight:900;margin-bottom:8px;}
 .delirium-number-note{text-align:center;font-size:clamp(18px,2.7vw,30px);font-weight:900;line-height:1.35;color:#374151;background:#fffbeb;border:4px solid #92400e;border-radius:22px;padding:12px;margin-bottom:14px;}
@@ -1069,7 +1063,79 @@ button.spotdiff-cell:active{
 .delirium-number-record .ok{background:#dcfce7;}.delirium-number-record .miss{background:#fee2e2;}.delirium-number-record .false{background:#fef3c7;}.delirium-number-record .unable{background:#e5e7eb;}
 @media(max-width:700px){.delirium-number-menu,.delirium-number-controls,.delirium-number-record{grid-template-columns:1fr;}.delirium-digit{min-width:48px;height:62px;}}
 
+
+/* ===== 2026-09-02 下方快捷列：字放大、格子縮小 ===== */
+.nav{
+  grid-template-columns:repeat(6,1fr) !important;
+  gap:7px !important;
+  padding:6px 10px 10px !important;
+}
+.nav button{
+  min-height:58px !important;
+  height:auto !important;
+  padding:7px 8px !important;
+  border-radius:15px !important;
+  font-size:28px !important;
+  font-weight:900 !important;
+  line-height:1.08 !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+}
+#navHome,
+#navRepeat{
+  grid-column:span 3 !important;
+  min-height:58px !important;
+  font-size:28px !important;
+}
+#navSlow,
+#navDont{
+  grid-column:span 3 !important;
+  min-height:60px !important;
+  font-size:30px !important;
+}
+#navTranslate{
+  grid-column:1 / -1 !important;
+  min-height:58px !important;
+  font-size:27px !important;
+  padding:7px 10px !important;
+  margin:0 !important;
+}
+.translate-note{
+  grid-column:1 / -1 !important;
+  margin:0 !important;
+  padding:2px 6px 4px !important;
+  font-size:14px !important;
+  line-height:1.15 !important;
+}
+#navStop{
+  grid-column:1 / -1 !important;
+  min-height:52px !important;
+  font-size:25px !important;
+  padding:5px 8px !important;
+}
+@media(max-width:700px){
+  .nav{gap:6px !important;padding:5px 7px 8px !important;}
+  .nav button{min-height:52px !important;padding:6px 5px !important;font-size:23px !important;border-radius:13px !important;}
+  #navHome,#navRepeat{min-height:52px !important;font-size:23px !important;}
+  #navSlow,#navDont{min-height:54px !important;font-size:25px !important;}
+  #navTranslate{min-height:52px !important;font-size:23px !important;}
+  #navStop{min-height:48px !important;font-size:22px !important;}
+  .translate-note{font-size:12px !important;}
+}
+
 </style>
+
+<!-- ICU 溝通平板 icon / iPad 主畫面設定 -->
+<link rel="icon" type="image/png" href="./icon.png?v=20260902">
+<link rel="shortcut icon" type="image/png" href="./icon.png?v=20260902">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=20260902">
+<link rel="manifest" href="./manifest.webmanifest?v=20260902">
+<meta name="application-name" content="永康榮總 ICU 溝通平板">
+<meta name="apple-mobile-web-app-title" content="永康榮總 ICU 溝通平板">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 </head>
 <body>
 <div class="overlay" id="overlay"><div><div style="font-size:72px">🔊</div><div style="font-size:42px;font-weight:900">請先啟用聲音</div><div style="font-size:26px;line-height:1.45">請先按下方按鈕，系統會報時並告知目前所在單位。</div><button class="start" onclick="unlockVoice()">啟用聲音並報時定位</button></div></div>
@@ -1166,13 +1232,13 @@ button.spotdiff-cell:active{
 <div class="interactive-warning">小遊戲以陪伴與互動為主，不倒數、不扣分、不作正式認知判讀。棋盤遊戲、棋子移動、找碴、紅旗白旗、撿紅點、有聲書與稱讚回饋只作陪伴與互動，病人疲倦或不適時請立即停止。</div>
 <div class="interactive-warning">Google 翻譯為外部連結，請避免輸入病人姓名、病歷號等個資。</div>
 <div class="interactive-warning">每位病人或每次評估前，請按「重置本次定向」清空上一筆紀錄。</div>
-<div class="interactive-warning">數字注意力題依護理端回饋改為兩組：第一組看到 8 有動作；第二組看到 1 有動作。</div>
+<div class="interactive-warning">數字注意力題依護理端回饋改為兩組：第一組聽到 8 有動作；第二組聽到 1 有動作。</div>
     <div id="interactiveHome" class="interactive-grid">
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('nonverbal')">🖐️ 非語言互動<span class="small">外籍／無翻譯優先</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('game')">🎮 小遊戲<span class="small">找圖案／點數字</span></button>
       <button class="interactive-menu-btn" type="button" onclick="showBoardGameMenu()">⭕ 棋盤遊戲<span class="small">OOXX／五子棋</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('command')">👂 中文聽指令</button>
-      <button class="interactive-menu-btn" type="button" onclick="startDeliriumNumberPage()">🔢 譫妄數字注意力<span class="small">看到 8／1 有動作</span></button>
+      <button class="interactive-menu-btn" type="button" onclick="startDeliriumNumberPage()">🔊 數字聽覺注意力<span class="small">聽到 8／1 有動作</span></button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('yesno')">✅ 中文是／不是</button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('orientation')">🏥 中文定向問答</button>
       <button class="interactive-menu-btn" type="button" onclick="startInteractiveCategory('picture')">🖼️ 找圖片</button>
@@ -1340,19 +1406,19 @@ button.spotdiff-cell:active{
 
 
 <div id="deliriumNumberWrap" class="delirium-number-wrap hidden">
-  <div class="delirium-number-title">🔢 譫妄數字注意力</div>
-  <div class="delirium-number-note">依護理端回饋調整：第一組看到紅色 8 有動作；第二組看到紅色 1 有動作。可用舉手、眨眼、點頭或按一下代替。</div>
+  <div class="delirium-number-title">🔊 數字聽覺注意力</div>
+  <div class="delirium-number-note">護理師只要按一次組別即可自動播放完整數字串；每個數字之間固定間隔 2 秒。病人只需聽聲音反應，畫面數字與紅字僅供護理師參考。</div>
   <div class="delirium-number-menu">
-    <button type="button" onclick="startDeliriumNumberGroup('eight')">第一組<br>看到 8 有動作</button>
-    <button type="button" onclick="startDeliriumNumberGroup('one')">第二組<br>看到 1 有動作</button>
+    <button type="button" onclick="playDeliriumNumberSequence('eight')">▶ 第一組<br>聽到 8 有動作</button>
+    <button type="button" onclick="playDeliriumNumberSequence('one')">▶ 第二組<br>聽到 1 有動作</button>
   </div>
   <div id="deliriumNumberStrip" class="delirium-number-strip"></div>
   <div id="deliriumNumberBig" class="delirium-number-big">請選擇一組</div>
-  <div id="deliriumNumberStatus" class="delirium-number-status">護理師可手動按「下一個數字」，依病人反應記錄。</div>
+  <div id="deliriumNumberStatus" class="delirium-number-status">請直接按第一組或第二組；系統會自動慢速播放完整數字串，每個數字間隔 2 秒。</div>
   <div class="delirium-number-controls">
-    <button type="button" onclick="nextDeliriumNumber()">➡️ 下一個數字</button>
-    <button type="button" onclick="resetCurrentDeliriumNumberGroup()">↻ 重跑本組</button>
-    <button type="button" onclick="showInteractiveHome()">🏠 回定向首頁</button>
+    <button type="button" onclick="replayDeliriumNumberGroup()">🔊 重播本組</button>
+    <button type="button" onclick="cancelDeliriumNumberAutoplay()">⏹ 停止播放</button>
+    <button type="button" onclick="showInteractiveHome(); cancelDeliriumNumberAutoplay(false)">🏠 回定向首頁</button>
   </div>
   <div class="delirium-number-record">
     <button type="button" class="ok" onclick="recordDeliriumNumber('有動作')">✅ 有動作</button>
@@ -1958,6 +2024,7 @@ let interactivePromptTimer = null;
 let interactivePromptToken = 0;
 
 function showInteractiveHome(){
+  if(typeof cancelDeliriumNumberAutoplay === 'function') cancelDeliriumNumberAutoplay(false);
   stopPlayback();
   clearTimeout(interactivePromptTimer);
   interactivePromptToken++;
@@ -2173,6 +2240,7 @@ function openGoogleTranslate(){
 
 
 function resetInteractiveSession(){
+  if(typeof cancelDeliriumNumberAutoplay === 'function') cancelDeliriumNumberAutoplay(false);
   stopPlayback();
   if(typeof interactivePromptTimer !== "undefined") clearTimeout(interactivePromptTimer);
   if(typeof interactivePromptToken !== "undefined") interactivePromptToken++;
@@ -2989,10 +3057,10 @@ function recordPraise(){
 }
 
 
-/* ===== 國際譫妄數字注意力：看到目標數字有動作 ===== */
+/* ===== 國際譫妄數字聽覺注意力：聽到目標數字有動作 ===== */
 const DELIRIUM_NUMBER_GROUPS = {
-  eight:{title:"第一組：看到 8 有動作",target:"8",numbers:["6","8","5","9","8","3","8","8","4","7"]},
-  one:{title:"第二組：看到 1 有動作",target:"1",numbers:["8","1","7","5","1","4","1","1","3","6"]}
+  eight:{title:"第一組：聽到 8 有動作",target:"8",numbers:["6","8","5","9","8","3","8","8","4","7"]},
+  one:{title:"第二組：聽到 1 有動作",target:"1",numbers:["8","1","7","5","1","4","1","1","3","6"]}
 };
 let deliriumNumberGroupKey = null;
 let deliriumNumberIndex = -1;
@@ -3027,9 +3095,9 @@ function startDeliriumNumberGroup(key){
   renderDeliriumNumberStrip();
   const status = document.getElementById("deliriumNumberStatus");
   const big = document.getElementById("deliriumNumberBig");
-  if(status && deliriumNumberCurrent) status.innerText = deliriumNumberCurrent.title + "。請按下一個數字開始。";
+  if(status && deliriumNumberCurrent) status.innerText = deliriumNumberCurrent.title + "。請按下一個數字開始，並請病人聽聲音反應。";
   if(big){big.innerText = "準備"; big.classList.remove("target");}
-  if(deliriumNumberCurrent) speakInteractivePromptChunks(deliriumNumberCurrent.title + "。看到目標數字，請有動作。");
+  if(deliriumNumberCurrent) speakInteractivePromptChunks(deliriumNumberCurrent.title + "。聽到目標數字，請有動作。");
 }
 
 function renderDeliriumNumberStrip(){
@@ -3066,8 +3134,9 @@ function nextDeliriumNumber(){
   const big = document.getElementById("deliriumNumberBig");
   const status = document.getElementById("deliriumNumberStatus");
   if(big){big.innerText = n; big.classList.toggle("target", isTarget);}
-  if(status) status.innerText = isTarget ? "目標數字：" + n + "。請觀察是否有動作。" : "非目標數字：" + n + "。";
+  if(status) status.innerText = isTarget ? "目標數字：" + n + "。請觀察病人聽到後是否有動作。" : "非目標數字：" + n + "。";
   renderDeliriumNumberStrip();
+  speakInteractivePromptChunks(n);
 }
 
 function resetCurrentDeliriumNumberGroup(){
@@ -3079,19 +3148,150 @@ function recordDeliriumNumber(outcome){
   const now = new Date();
   const hh = String(now.getHours()).padStart(2,"0");
   const mm = String(now.getMinutes()).padStart(2,"0");
-  const groupTitle = deliriumNumberCurrent ? deliriumNumberCurrent.title : "譫妄數字注意力";
+  const groupTitle = deliriumNumberCurrent ? deliriumNumberCurrent.title : "數字聽覺注意力";
   let positionText = "";
   if(deliriumNumberCurrent && deliriumNumberIndex >= 0 && deliriumNumberIndex < deliriumNumberCurrent.numbers.length){
     const n = deliriumNumberCurrent.numbers[deliriumNumberIndex];
     const isTarget = n === deliriumNumberCurrent.target;
     positionText = "｜第" + (deliriumNumberIndex + 1) + "個數字：" + n + (isTarget ? "，目標" : "，非目標");
   }
-  const item = hh + ":" + mm + "｜" + groupTitle + positionText + "｜" + outcome + "｜數字注意力互動，不作正式診斷判讀";
+  const item = hh + ":" + mm + "｜" + groupTitle + positionText + "｜" + outcome + "｜數字聽覺注意力互動，不作正式診斷判讀";
   interactiveLogs.unshift(item);
   interactiveLogs = interactiveLogs.slice(0,20);
   updateInteractiveLog();
   const status = document.getElementById("deliriumNumberStatus");
   if(status) status.innerText = "已記錄：" + outcome;
+}
+
+
+function replayCurrentDeliriumNumber(){
+  if(!deliriumNumberCurrent || deliriumNumberIndex < 0 || deliriumNumberIndex >= deliriumNumberCurrent.numbers.length){
+    const status = document.getElementById("deliriumNumberStatus");
+    if(status) status.innerText = "目前沒有可重播的數字。";
+    return;
+  }
+  const n = deliriumNumberCurrent.numbers[deliriumNumberIndex];
+  speakInteractivePromptChunks(n);
+  const status = document.getElementById("deliriumNumberStatus");
+  if(status) status.innerText = "已重播目前數字，請觀察病人聽到後反應。";
+}
+
+
+/* ===== 數字聽覺注意力：單鍵自動慢速播放 ===== */
+const DELIRIUM_DIGIT_RATE = 0.38;
+const DELIRIUM_DIGIT_GAP_MS = 2000;
+let deliriumAutoToken = 0;
+let deliriumAutoTimer = null;
+let deliriumAutoPlaying = false;
+
+function cancelDeliriumNumberAutoplay(updateStatus=true){
+  deliriumAutoToken++;
+  deliriumAutoPlaying = false;
+  if(deliriumAutoTimer){
+    clearTimeout(deliriumAutoTimer);
+    deliriumAutoTimer = null;
+  }
+  try{
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+  }catch(e){}
+  if(updateStatus){
+    const status = document.getElementById("deliriumNumberStatus");
+    if(status) status.innerText = "已停止播放。";
+  }
+}
+
+function speakOneDeliriumDigit(digit, token, onDone){
+  if(token !== deliriumAutoToken) return;
+  try{
+    const u = new SpeechSynthesisUtterance(String(digit));
+    u.lang = "zh-TW";
+    u.rate = DELIRIUM_DIGIT_RATE;
+    u.pitch = 1;
+    u.volume = 1;
+    u.onend = () => {
+      if(token !== deliriumAutoToken) return;
+      onDone();
+    };
+    u.onerror = () => {
+      if(token !== deliriumAutoToken) return;
+      onDone();
+    };
+    window.speechSynthesis.speak(u);
+  }catch(e){
+    onDone();
+  }
+}
+
+function playDeliriumNumberSequence(key){
+  cancelDeliriumNumberAutoplay(false);
+  deliriumNumberGroupKey = key;
+  deliriumNumberIndex = -1;
+  deliriumNumberCurrent = DELIRIUM_NUMBER_GROUPS[key] || null;
+  if(!deliriumNumberCurrent) return;
+
+  const token = ++deliriumAutoToken;
+  deliriumAutoPlaying = true;
+  const status = document.getElementById("deliriumNumberStatus");
+  const big = document.getElementById("deliriumNumberBig");
+
+  renderDeliriumNumberStrip();
+  if(big){
+    big.innerText = "播放中";
+    big.classList.remove("target");
+  }
+  if(status){
+    status.innerText = deliriumNumberCurrent.title + "｜自動播放中：每個數字間隔 2 秒。請專心觀察病人反應。";
+  }
+
+  const numbers = deliriumNumberCurrent.numbers.slice();
+  let idx = 0;
+
+  function speakNextDigit(){
+    if(token !== deliriumAutoToken) return;
+    if(idx >= numbers.length){
+      deliriumAutoPlaying = false;
+      deliriumNumberIndex = numbers.length - 1;
+      renderDeliriumNumberStrip();
+      if(big){
+        big.innerText = "完成";
+        big.classList.remove("target");
+      }
+      if(status){
+        status.innerText = "本組播放完成。可直接記錄整體反應，或按「重播本組」。";
+      }
+      return;
+    }
+
+    deliriumNumberIndex = idx;
+    renderDeliriumNumberStrip();
+
+    // 病人只需聽聲音；大字區不顯示實際數字，避免視覺提示。
+    if(big){
+      big.innerText = "請聽";
+      big.classList.remove("target");
+    }
+
+    speakOneDeliriumDigit(numbers[idx], token, () => {
+      idx++;
+      if(idx < numbers.length){
+        deliriumAutoTimer = setTimeout(speakNextDigit, DELIRIUM_DIGIT_GAP_MS);
+      }else{
+        speakNextDigit();
+      }
+    });
+  }
+
+  // 按下組別後直接開始，不再要求護理師逐個按。
+  speakNextDigit();
+}
+
+function replayDeliriumNumberGroup(){
+  if(!deliriumNumberGroupKey){
+    const status = document.getElementById("deliriumNumberStatus");
+    if(status) status.innerText = "請先選擇第一組或第二組。";
+    return;
+  }
+  playDeliriumNumberSequence(deliriumNumberGroupKey);
 }
 
 </script>
